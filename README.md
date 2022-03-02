@@ -1,5 +1,5 @@
-# NINE4 TEMPLATE #4
-<img src="./img/nine4-4.png"></img>
+CHURCH MANAGEMENT SYSTEM
+<!-- <img src="./img/nine4-4.png"></img> -->
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
