@@ -1,7 +1,7 @@
 import { Fragment } from "react";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import Card from "../components/Card";
+import Header from "../components/UI/Header";
+import Sidebar from "../components/UI/Sidebar";
+import Card from "../components/UI/Card";
 import Head from "next/head";
 
 const Seed = () => {
@@ -13,7 +13,7 @@ const Seed = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Header />
-            <div className="flex flex-row items-centre justify-start fixed w-screen h-screen bg-gray-100 leading-10">
+            <div className="flex flex-row items-centre justify-start fixed w-screen h-screen bg-gray-100 leading-10"    >
                 <Sidebar />
                 <div className="m-2 p-5 h-screen w-full">
                     <Card>

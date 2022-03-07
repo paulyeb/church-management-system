@@ -1,7 +1,7 @@
 import { Fragment } from "react";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import Card from "../components/Card";
+import Header from "../components/UI/Header";
+import Sidebar from "../components/UI/Sidebar";
+import Card from "../components/UI/Card";
 import Head from "next/head";
 
 const Families = () => {
@@ -32,13 +32,13 @@ const Families = () => {
                             <table class="text-left my-6 w-full mx-auto">
                             <thead>
                                 <tr>
-                                    <th class="border border-emerald-500 px-4 py-4 text-emerald-600 rounded-lg">Name</th>
+                                    <th class="border border-emerald-500 px-4 py-4 text-emerald-600 rounded-lg w-10">Name</th>
                                     <th class="border border-emerald-500 px-4 py-4 text-emerald-600 rounded-lg">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="hover:bg-gray-100 border border-emerald-500">
-                                    <td class="border border-emerald-500 px-4 py-4 text-emerald-600"></td>
+                                    <td class="border border-emerald-500 px-4 py-4 text-emerald-600">Hope</td>
                                     <td class="border border-emerald-500 px-4 py-4 text-emerald-600"></td>
                                 </tr>
                                 <tr class="hover:bg-gray-100 border border-emerald-500">

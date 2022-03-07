@@ -1,7 +1,7 @@
 import { Fragment } from "react";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import Card from "../components/Card";
+import Header from "../components/UI/Header";
+import Sidebar from "../components/UI/Sidebar";
+import Card from "../components/UI/Card";
 import Head from "next/head";
 
 const Tithe = () => {
