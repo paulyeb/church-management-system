@@ -2,8 +2,15 @@ import Header from "./UI/Header";
 import Sidebar from "./UI/Sidebar";
 import Card from "./UI/Card";
 import FamiliesTable from "./UI/Tables/FamiliesTable";
+import { useState } from "react";
+import NewFamilyForm from "./UI/Modals/ModalForms.js/NewFamilyForm";
 
 const Families = () => {
+    const [newFamily, setNewFamily] = useState(false);
+
+    const newFamilyHandler = () => {
+        setNewFamily(true);
+    }
     return (
         <>
             <Header />
@@ -11,6 +18,7 @@ const Families = () => {
                 <Sidebar />
                 <div className="m-2 p-5 h-screen w-full">
                     <Card>
+                        { newFamily && <NewFamilyForm close = {() => setNewFamily(false)} /> }
                         <div className="flex flex-row items-centre justify-between p-4">
                             <div className="font-bold">
                             Families
@@ -22,7 +30,7 @@ const Families = () => {
                                     placeholder="Search" 
                                 />
                                 <button 
-                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={newFamilyHandler}
                                 >
                                     NEW FAMILY
                                 </button>

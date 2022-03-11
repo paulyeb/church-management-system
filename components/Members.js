@@ -7,14 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import MembersTable from "./UI/Tables/MembersTable";
-import Backdrop from "./UI/Backdrop";
+import NewMemberForm from "./UI/Modals/ModalForms.js/NewMemberForm";
 
 const HomePage = () => {
     const [newMember, setNewMember] = useState(false);
 
     const newMemberHandler = (event) => {
         event.preventDefault();
-
+        
         setNewMember(true);
     }
 
@@ -60,15 +60,6 @@ const HomePage = () => {
             ]
         }
     ]
-    
-    const filterByNameHanlder = (e) => {
-        const enteredName = e.target.value.toLowerCase().indexOf();
-        // console.log(enteredName)
-    
-        const members = churchMembers.filter(member => member.name === enteredName)
-    
-        console.log(members)
-    }
 
     return (
         <>
@@ -77,7 +68,8 @@ const HomePage = () => {
                 <Sidebar />
                 <div className="m-2 p-5 h-screen w-full">
                     <Card>
-                        {newMember && <Backdrop /> }
+                        {newMember && <NewMemberForm close = {() => setNewMember(false)} /> }
+                        
                         <div className="flex flex-row items-centre justify-between p-4">
                             <div className="font-bold">
                             Members
@@ -86,8 +78,7 @@ const HomePage = () => {
                                 <input 
                                     type="search" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
-                                    placeholder="Search by Name" 
-                                    onInput={filterByNameHanlder}
+                                    placeholder="Search by Name"
                                 />
                                 <button 
                                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
