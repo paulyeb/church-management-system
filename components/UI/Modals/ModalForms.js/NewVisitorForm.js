@@ -1,25 +1,22 @@
-const RecordAttendanceForm = (props) => {
+const NewVisitorForm = (props) => {
     return (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-70 overflow-y-auto h-full w-full">
-            <div className="relative top-20 mx-auto p-5 border 2xl:w-2/5 xl:w-2/4 lg:w-2/4 md:w-3/4 sm:w-3/4  shadow-2xl rounded-2xl bg-white">
+            <div className="relative top-40 mx-auto p-5 border 2xl:w-2/5 xl:w-2/4 lg:w-2/4 md:w-3/4 sm:w-3/4  shadow-2xl rounded-2xl bg-white">
                 <div>
-                    <p className="text-center text-gray-500 font-light text-3xl">Attendance Record</p>
+                    <p className="text-center text-gray-500 font-light text-3xl">Record New Visitor</p>
                         <hr className=" mb-5 mt-2 mx-12"/>
 
                     <div className="m-4 text-center">
                         <input type="date" className="border-2 rounded font-light text-xl p-4 w-96  focus:outline-none text-gray-500" />
                     </div>
                     <div className="m-4 text-center">
-                        <input type="number" min={0} className="border-2 rounded font-light text-xl p-4 w-96  focus:outline-none text-gray-500" placeholder="MEN" />
+                        <input type="text" className="border-2 rounded font-light text-xl p-4 w-96  focus:outline-none text-gray-500" placeholder="NAME" />
                     </div>
                     <div className="m-4 text-center">
-                        <input type="number" min={0} className="border-2 rounded font-light text-xl p-4 w-96  focus:outline-none text-gray-500" placeholder="WOMEN" />
+                        <input type="tel" className="border-2 rounded font-light text-xl p-4 w-96  focus:outline-none text-gray-500" placeholder="PHONE" />
                     </div>
                     <div className="m-4 text-center">
-                        <input type="number" min={0} className="border-2 rounded font-light text-xl p-4 w-96  focus:outline-none text-gray-500" placeholder="CHILDREN" />
-                    </div>
-                    <div className="m-4 text-center">
-                        <input type="number" min={0} className="border-2 rounded font-light text-xl p-4 w-96  focus:outline-none text-gray-500" placeholder="VISITORS" />
+                        <input type="text" className="border-2 rounded font-light text-xl p-4 w-96  focus:outline-none text-gray-500" placeholder="PURPOSE OF VISIT" />
                     </div>
                     <div className="m-4 text-center">
                         <input type="text" className="border-2 rounded font-light text-xl p-4 w-96  focus:outline-none text-gray-500" placeholder="COMMENTS" />
@@ -40,4 +37,4 @@ const RecordAttendanceForm = (props) => {
     )
 }
 
-export default RecordAttendanceForm;
+export default NewVisitorForm;

@@ -7,7 +7,7 @@ const NewFamilyForm = (props) => {
                         <hr className=" my-5 mx-10"/>
 
                     <div className="m-10 text-center">
-                        <input type="text" className="border-2 rounded font-light text-xl p-4 w-96 sm:w-80  focus:outline-none text-gray-500" placeholder="FAMILY" />
+                        <input type="text" className="border-2 rounded font-light text-xl p-4 w-96 sm:w-80  focus:outline-none text-gray-500" placeholder="FAMILY NAME" />
                     </div>
 
                     <div className="flex flex-row items-centre justify-end ">

@@ -3,63 +3,54 @@ import Header from "./UI/Header";
 import Card from "./UI/Card";
 import Sidebar from "./UI/Sidebar";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faPen } from "@fortawesome/free-solid-svg-icons";
 import MembersTable from "./UI/Tables/MembersTable";
 import NewMemberForm from "./UI/Modals/ModalForms.js/NewMemberForm";
 
-const HomePage = () => {
-    const [newMember, setNewMember] = useState(false);
+const ALL_MEMBERS = [
+    {
+      id: 1,
+      name: 'Alfred Korankye',
+      phone: '0233432432',
+      family: 'Love'
+    },
+    {
+      id: 2,
+      name: 'Osborn Amankwah',
+      phone: '0245432892',
+      family: 'Peace'
+    },
+    {
+      id: 3,
+      name: 'Isaac Kusi',
+      phone: '0542892432',
+      family: 'Hope'
+    },
+    {
+      id: 4,
+      name: 'William Morgan-Darko',
+      phone: '0202348902',
+      family: 'Faith'
+    }
+]
 
-    const newMemberHandler = (event) => {
+const HomePage = () => {
+    const [allMembers, setAllMembers] = useState(ALL_MEMBERS);
+
+    const [newMemberForm, setNewMemberForm] = useState(false);
+
+    const newMemberFormHandler = (event) => {
         event.preventDefault();
         
-        setNewMember(true);
+        setNewMemberForm(true);
     }
 
-    const churchMembers = [
-        {
-          name: 'Alfred Korankye',
-          phone: '0233432432',
-          family: 'Love',
-          actions: [
-                <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>,
-                <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}}/>,
-                <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
-            ]
-        },
-        {
-          name: 'Osborn Amankwah',
-          phone: '0245432892',
-          family: 'Peace',
-          actions: [
-                <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>,
-                <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}}/>,
-                <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
-            ]
-        },
-        {
-          name: 'Isaac Kusi',
-          phone: '0542892432',
-          family: 'Hope',
-          actions: [
-                <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>,
-                <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}}/>,
-                <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
-            ]
-        },
-        {
-          name: 'William Morgan-Darko',
-          phone: '0202348902',
-          family: 'Faith',
-          actions: [
-                <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>,
-                <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}}/>,
-                <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
-            ]
-        }
-    ]
+    const newMemberHandler = (members) => {
+        setAllMembers(prevMembers => {
+            return [members, ...prevMembers];
+        });
+
+        console.log()
+    }
 
     return (
         <>
@@ -68,7 +59,7 @@ const HomePage = () => {
                 <Sidebar />
                 <div className="m-2 p-5 h-screen w-full">
                     <Card>
-                        {newMember && <NewMemberForm close = {() => setNewMember(false)} /> }
+                        {newMemberForm && <NewMemberForm onAddNewMember={newMemberHandler} onClose={() => setNewMemberForm(false)} /> }
                         
                         <div className="flex flex-row items-centre justify-between p-4">
                             <div className="font-bold">
@@ -83,13 +74,13 @@ const HomePage = () => {
                                 <button 
                                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
                                     type="button"
-                                    onClick = {newMemberHandler} >
+                                    onClick = {newMemberFormHandler} >
                                     NEW MEMBER
                                 </button>
                             </div>
                         </div>
                         <div className="container px-4">
-                            <MembersTable churchMembers = {churchMembers} />
+                            <MembersTable memberDetails = {allMembers} />
                         </div>
                     </Card>
                 </div>
