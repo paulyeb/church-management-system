@@ -4,6 +4,7 @@ import Card from "./UI/Card";
 import VisitorsTable from "./UI/Tables/VisitorsTable";
 import NewVisitorForm from "./UI/Modals/ModalForms.js/NewVisitorForm";
 import { useState } from "react";
+import AddRecordButton from "./UI/Button.js/AddRecordButton";
 
 const Visitors = () => {
     const [newVisitor, setNewVisitor] = useState(false);
@@ -29,11 +30,9 @@ const Visitors = () => {
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
                                     placeholder="Search by name" 
                                 />
-                                <button 
-                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={newVisitorHandler}
-                                >
+                                <AddRecordButton onClick={newVisitorHandler}>
                                     RECORD VISITOR
-                                </button>
+                                </AddRecordButton>
                             </div>
                         </div>
                         <div className="container px-4">

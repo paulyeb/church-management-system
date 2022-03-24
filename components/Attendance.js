@@ -5,6 +5,7 @@ import AttendanceTable from "./UI/Tables/AttendanceTable";
 import RecordAttendanceForm from "./UI/Modals/ModalForms.js/RecordAttendance";
 
 import { useState } from "react";
+import AddRecordButton from "./UI/Button.js/AddRecordButton";
 
 const Attendance = () => {
     const [newAttendance, setNewAttendance] = useState(false);
@@ -31,11 +32,9 @@ const Attendance = () => {
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
                                     placeholder="Search by date" 
                                 />
-                                <button 
-                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={recordAttendanceHandler}
-                                >
+                                <AddRecordButton onClick={recordAttendanceHandler}>
                                     RECORD ATTENDANCE
-                                </button>
+                                </AddRecordButton>
                             </div>
                         </div>
                         <div className="container px-4">

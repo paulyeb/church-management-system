@@ -3,41 +3,41 @@ import { useState } from "react";
 import Header from "./UI/Header";
 import Sidebar from "./UI/Sidebar";
 import Card from "./UI/Card";
-import SeedsTable from "./UI/Tables/SeedsTable";
-import RecordSeed from "./UI/Modals/ModalForms.js/RecordSeed";
+import RolesTable from "./UI/Tables/RolesTable";
+import NewRoleForm from "./UI/Modals/ModalForms.js/NewRoleForm";
 import AddRecordButton from "./UI/Button.js/AddRecordButton";
 
-const Seed = () => {
-    const [newSeed, setNewSeed] = useState(false);
+const Roles = () => {
+    const [newRole, setNewRole] = useState(false);
 
-    const recordSeedHandler = () => {
-        setNewSeed(true);
+    const newRoleHandler = () => {
+        setNewRole(true);
     }
     return (
         <>
             <Header />
-            <div className="flex flex-row items-centre justify-start fixed w-screen h-screen bg-gray-100 leading-10"    >
+            <div className="flex flex-row items-centre justify-start fixed w-screen h-screen bg-gray-100 leading-10">
                 <Sidebar />
                 <div className="m-2 p-5 h-screen w-full">
                     <Card>
-                        {newSeed && <RecordSeed close = {() => setNewSeed(false)} />}   
+                        { newRole && <NewRoleForm close = {() => setNewRole(false)} /> }
                         <div className="flex flex-row items-centre justify-between p-4">
                             <div className="font-bold">
-                            Seeds
+                            Roles
                             </div>
                             <div className="mx-4">
                                 <input 
-                                    type="date" 
+                                    type="search" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
-                                    placeholder="Search by date" 
+                                    placeholder="Search" 
                                 />
-                                <AddRecordButton onClick={recordSeedHandler}>
-                                    RECORD SEED
+                                <AddRecordButton onClick={newRoleHandler}>
+                                    NEW ROLE
                                 </AddRecordButton>
                             </div>
                         </div>
                         <div className="container px-4">
-                            <SeedsTable />
+                            <RolesTable />
                         </div>
                     </Card>
                 </div>
@@ -46,4 +46,4 @@ const Seed = () => {
     );
 }
 
-export default Seed;
+export default Roles;
