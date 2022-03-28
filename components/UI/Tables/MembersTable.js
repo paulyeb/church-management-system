@@ -1,14 +1,15 @@
+import Link from 'next/link';
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrashRestoreAlt } from "@fortawesome/free-solid-svg-icons";
 
 const MembersTable = (props) => {
-
-    const actions = [
-        <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>,
-        <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}}/>,
-        <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
-    ];
+    const showUserHandler = (memberId) => {
+        fetch(`http://localhost:8000/api/v1/users/${memberId}`)
+            .then(res => res.json())
+            .then(data => console.log(data));
+    }
 
     return ( 
         <table className="text-left my-6 w-full mx-auto">
@@ -28,9 +29,26 @@ const MembersTable = (props) => {
                             <td className="px-4 py-2 text-emerald-600">{member.family?.name}</td>
                             <td className="px-4 py-2 text-emerald-600">
                                 <div className="flex flex-row items-centre justify-start">
-                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full">{actions[0]}</button>
-                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">{actions[1]}</button>
-                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">{actions[2]}</button>
+                                    <button 
+                                        className="p-3 hover:bg-gray-300 hover:border-2 rounded-full"
+                                        onClick={showUserHandler} memberid={member.id}>
+                                        <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
+                                    </button>
+                                    <Link href={`edit/${member.id}`}> 
+                                        <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
+                                            <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
+                                        </button>
+                                    </Link> 
+                                    <Link href={`delete/${member.id}`}>
+                                        <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
+                                            <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
+                                        </button>
+                                    </Link>
+                                    {member.deleted_at && <Link href={`restore/${member.id}`}>
+                                        <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
+                                            <FontAwesomeIcon icon = {faTrashRestoreAlt} style={{width: '20px', color: 'black'}}/>
+                                        </button>
+                                    </Link>}
                                 </div>
                             </td>
                         </tr>     
