@@ -16,7 +16,7 @@ const Roles = () => {
     return (
         <>
             <Header />
-            <div className="flex flex-row items-centre justify-start fixed w-screen h-screen bg-gray-100 leading-10">
+            <div className="flex flex-row items-centre justify-start w-screen h-screen bg-gray-100 leading-10">
                 <Sidebar />
                 <div className="m-2 p-5 h-screen w-full">
                     <Card>

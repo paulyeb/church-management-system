@@ -35,9 +35,11 @@ const MembersTable = (props) => {
                                         <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
                                     </button>
                                     <Link href={`edit/${member.id}`}> 
+                                        <a>
                                         <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                             <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
                                         </button>
+                                        </a>
                                     </Link> 
                                     <Link href={`delete/${member.id}`}>
                                         <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">

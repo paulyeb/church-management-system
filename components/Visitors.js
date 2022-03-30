@@ -5,21 +5,52 @@ import VisitorsTable from "./UI/Tables/VisitorsTable";
 import NewVisitorForm from "./UI/Modals/ModalForms.js/NewVisitorForm";
 import { useState } from "react";
 import AddRecordButton from "./UI/Button.js/AddRecordButton";
+import { useEffect } from "react";
 
 const Visitors = () => {
     const [newVisitor, setNewVisitor] = useState(false);
+    const [allVisitors, setAllVisitors] = useState([]);
+
 
     const newVisitorHandler = () => {
         setNewVisitor(true);
     }
+
+    useEffect(() => {
+        fetchVisitors();
+    }, [])
+
+    const saveVisitorHandler = (visitor) => {
+        console.log(visitor);
+        fetch("http://localhost:8000/api/v1/visitors/", {
+            method: "POST",
+            mode: 'cors',
+            body: JSON.stringify(visitor),
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data),
+                fetchVisitors();
+            })
+    }
+
+    const fetchVisitors = () => {
+        fetch("http://localhost:8000/api/v1/visitors")
+            .then(res => res.json())
+            .then(data => setAllVisitors(data))
+    }
     return (
         <>
             <Header />
-            <div className="flex flex-row items-centre justify-start fixed w-screen h-screen bg-gray-100 leading-10">
+            <div className="flex flex-row items-centre justify-start w-screen h-screen bg-gray-100 leading-10">
                 <Sidebar />
                 <div className="m-2 p-5 h-screen w-full">
                     <Card>
-                    {newVisitor && <NewVisitorForm close = {() => setNewVisitor(false)} />}
+                    {newVisitor && <NewVisitorForm onAddVisitor={saveVisitorHandler} close = {() => setNewVisitor(false)} />}
                         <div className="flex flex-row items-centre justify-between p-4">
                             <div className="font-bold">
                             Visitors
@@ -36,7 +67,7 @@ const Visitors = () => {
                             </div>
                         </div>
                         <div className="container px-4">
-                          <VisitorsTable />  
+                          <VisitorsTable allVisitors={allVisitors} />  
                         </div>
                     </Card>
                 </div>

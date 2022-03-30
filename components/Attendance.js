@@ -4,7 +4,7 @@ import Card from "./UI/Card";
 import AttendanceTable from "./UI/Tables/AttendanceTable";
 import RecordAttendanceForm from "./UI/Modals/ModalForms.js/RecordAttendance";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddRecordButton from "./UI/Button.js/AddRecordButton";
 
 const Attendance = () => {
@@ -13,15 +13,39 @@ const Attendance = () => {
     const recordAttendanceHandler = () => {
         setNewAttendance(true);
     }
+    const [attendances, setAttendances] = useState([]);
+
+    useEffect(() => {
+        fetchAllAttendance();
+    }, []);
+
+    const saveAttendanceHandler = (attendanceRecord) => {
+        fetch("http://localhost:8000/api/v1/attendances/", {
+            method: "POST",
+            mode: "cors",
+            body: JSON.stringify(attendanceRecord),
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "appliction/json"
+            }
+        })
+            .then(res => res.json())
+            .then(data => {console.log(data), fetchAllAttendance()})
+    }
+    const fetchAllAttendance = () => {
+        fetch("http://localhost:8000/api/v1/attendances/")
+            .then(res => res.json())
+            .then(data => setAttendances(data));
+    }
 
     return (
         <>
             <Header />
-            <div className="flex flex-row items-centre justify-start fixed w-screen h-screen bg-gray-100 leading-10">
+            <div className="flex flex-row items-centre justify-start w-screen h-screen bg-gray-100 leading-10">
                 <Sidebar />
                 <div className="m-2 p-5 h-screen w-full">
                     <Card>
-                        {newAttendance && <RecordAttendanceForm close = {() => setNewAttendance(false)} />}
+                        {newAttendance && <RecordAttendanceForm onAddAttendance={saveAttendanceHandler} close = {() => setNewAttendance(false)} />}
                         <div className="flex flex-row items-centre justify-between p-4">
                             <div className="font-bold">
                             Attendance Records
@@ -38,7 +62,7 @@ const Attendance = () => {
                             </div>
                         </div>
                         <div className="container px-4">
-                            <AttendanceTable />
+                            <AttendanceTable allAttendances={attendances}/>
                         </div>
                     </Card>
                 </div>

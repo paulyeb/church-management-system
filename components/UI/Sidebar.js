@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faMoneyBill1,  } from '@fortawesome/free-regular-svg-icons';
-import { faClipboardList, faUsers, faWalking, faFolderTree, faSitemap, faPerson } from '@fortawesome/free-solid-svg-icons';
+import { faClipboardList, faUsers, faWalking, faFolderTree, faSitemap } from '@fortawesome/free-solid-svg-icons';
 
 
 const Sidebar = () => {
@@ -10,67 +10,87 @@ const Sidebar = () => {
         <div className="border-solid border-2 bg-white">
           <ul>           
             <Link href='/'>
+                <a>
                   <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
-                    <a><FontAwesomeIcon icon = {faUser} style={{width: '20px', color: 'seagreen' }}  /></a>
+                      <FontAwesomeIcon icon = {faUser} style={{width: '20px', color: 'seagreen' }}  />
                   </li>
+                </a>
             </Link> 
 
             <Link href='/families'>
+                <a>
                   <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
-                    <a><FontAwesomeIcon icon = {faUsers} style={{width: '20px', color: 'seagreen'}} /></a>
+                      <FontAwesomeIcon icon = {faUsers} style={{width: '20px', color: 'seagreen'}} />
                   </li>
+                </a>
             </Link>
             
             <Link href='/visitors'>
+                <a>
                   <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
-                    <a><FontAwesomeIcon icon = {faWalking} style={{width: '20px', color: 'seagreen'}} /></a>
+                      <FontAwesomeIcon icon = {faWalking} style={{width: '20px', color: 'seagreen'}} />
                   </li>
+                </a>
             </Link>
 
             <hr/>
 
-              <Link href='/attendance'>
-                <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
-                  <a><FontAwesomeIcon icon = {faClipboardList} style={{width: '20px', color: 'seagreen'}} /></a>
-                </li>
+              <Link href='/attendances'>
+                  <a>
+                    <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
+                      <FontAwesomeIcon icon = {faClipboardList} style={{width: '20px', color: 'seagreen'}} />
+                    </li>
+                  </a>
               </Link>
             
               <Link href='/departments'>
-                <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
-                  <a><FontAwesomeIcon icon = {faSitemap} style={{width: '20px', color: 'seagreen'}} /></a>
-                </li>
+                  <a>
+                    <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
+                      <FontAwesomeIcon icon = {faSitemap} style={{width: '20px', color: 'seagreen'}} />
+                    </li>
+                  </a>
               </Link>
 
               <Link href='/roles'>
-                <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
-                  <a><FontAwesomeIcon icon = {faFolderTree} style={{width: '20px', color: 'seagreen'}} /></a>
-                </li>
+                  <a>
+                    <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
+                      <FontAwesomeIcon icon = {faFolderTree} style={{width: '20px', color: 'seagreen'}} />
+                    </li>
+                  </a>
               </Link>
 
             <hr />
 
-              <Link href='/offering'>
-                <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
-                  <a><FontAwesomeIcon icon = {faMoneyBill1} style={{width: '20px', color: 'seagreen'}} /></a>
-                </li>
+              <Link href='/offerings'>
+                  <a>
+                    <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
+                      <FontAwesomeIcon icon = {faMoneyBill1} style={{width: '20px', color: 'seagreen'}} />
+                    </li>
+                  </a>
               </Link>
 
-              <Link href='/tithe'>
-                <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
-                  <a><FontAwesomeIcon icon = {faMoneyBill1} style={{width: '20px', color: 'seagreen'}} /></a>
-                </li>
+              <Link href='/tithes'>
+                  <a>
+                    <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
+                      <FontAwesomeIcon icon = {faMoneyBill1} style={{width: '20px', color: 'seagreen'}} />
+                    </li>
+                  </a>
               </Link>
 
-              <Link href='/seed'>
-                <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
-                  <a><FontAwesomeIcon icon = {faMoneyBill1} style={{width: '20px', color: 'seagreen'}} /></a>
-                </li>
+              <Link href='/seeds'>
+                  <a>
+                    <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
+                      <FontAwesomeIcon icon = {faMoneyBill1} style={{width: '20px', color: 'seagreen'}} />
+                    </li>
+                  </a>
               </Link>
 
               <Link href='/expenditure'>
-                <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
-                  <a><FontAwesomeIcon icon = {faMoneyBill1} style={{width: '20px', color: 'seagreen'}} /></a>
-                </li>
+                  <a>
+                    <li className="py-4 px-8 hover:bg-gray-200 cursor-pointer">
+                      <FontAwesomeIcon icon = {faMoneyBill1} style={{width: '20px', color: 'seagreen'}} />
+                    </li>
+                  </a>
               </Link>
 
             <hr />

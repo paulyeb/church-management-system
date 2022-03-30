@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./UI/Header";
 import Sidebar from "./UI/Sidebar";
 import Card from "./UI/Card";
@@ -12,15 +12,45 @@ const Tithe = () => {
 
     const recordTitheHandler = () => {
         setNewTithe(true);
+    }    
+    
+    const [allTithe, setAllTithe] = useState([]);
+
+    useEffect(() => {
+        fetchTithes();
+    }, []);
+
+    const saveTitheHandler = (titheData) => {
+        fetch("http://localhost:8000/api/v1/tithes/", {
+            method: "POST",
+            mode: "cors",
+            body: JSON.stringify(titheData),
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data), 
+                fetchTithes();
+            })
     }
+
+    const fetchTithes = () => {
+        fetch("http://localhost:8000/api/v1/tithes")
+            .then(res => res.json())
+            .then(data => setAllTithe(data));
+    }
+
     return (
         <>
             <Header />
-            <div className="flex flex-row items-centre justify-start fixed w-screen h-screen bg-gray-100 leading-10">
+            <div className="flex flex-row items-centre justify-start w-screen h-screen bg-gray-100 leading-10">
                 <Sidebar />
                 <div className="m-2 p-5 h-screen w-full">
                     <Card>
-                    {newTithe && <RecordTithe close = {() => setNewTithe(false)} />}
+                    {newTithe && <RecordTithe onAddTithe={saveTitheHandler} close = {() => setNewTithe(false)} />}
                         <div className="flex flex-row items-centre justify-between p-4">
                             <div className="font-bold">
                             Tithes
@@ -37,7 +67,7 @@ const Tithe = () => {
                             </div>
                         </div>
                         <div className="container px-4">
-                            <TitheTable />
+                            <TitheTable allTithe = { allTithe } />
                         </div>
                     </Card>
                 </div>

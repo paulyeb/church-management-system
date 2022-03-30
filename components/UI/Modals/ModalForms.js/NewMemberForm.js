@@ -70,11 +70,11 @@ const NewMemberForm = (props) => {
                     <hr className=" my-3 mx-12"/>
                     <div className="grid grid-cols-2 g-4 text-xl p-4 justify-items-center">
                         <div className="m-2">           
-                            <input type="text" className="border-2 rounded w-64 md:w-80 font-light text-xl p-4 focus:outline-none text-gray-500" placeholder="NAME *" ref={nameInputRef}  />
+                            <input type="text" className="border-2 rounded w-64 md:w-80 font-light text-xl p-4 focus:outline-none text-gray-500" placeholder="NAME *" ref={nameInputRef} required  />
                         </div>
 
                         <div className="m-2">
-                            <select className="border-2 rounded font-light text-xl p-4 focus:outline-none w-64 md:w-80  text-gray-500" ref={familyInputRef}>
+                            <select className="border-2 rounded font-light text-xl p-4 focus:outline-none w-64 md:w-80  text-gray-500" ref={familyInputRef} required >
                                 <option disabled selected hidden>FAMILY</option>    
                                 {/* <option className="text-gray-500" value="Hope">Hope</option>    
                                 <option className="text-gray-500" value="Love">Love</option>    
@@ -94,15 +94,15 @@ const NewMemberForm = (props) => {
                         </div>
                     
                         <div className="m-2">
-                            <input type="date" className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none text-gray-500" ref={dateOfBirthInputRef}/>
+                            <input type="date" className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none text-gray-500" ref={dateOfBirthInputRef} required />
                         </div>
 
                         <div className="m-2">
-                            <input type="tel" className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none text-gray-500" placeholder="TELEPHONE *" ref={telephoneInputRef}/>
+                            <input type="tel" className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none text-gray-500" placeholder="TELEPHONE *" ref={telephoneInputRef} required />
                         </div>
                     
                         <div className="m-2">
-                            <select className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none w-5/5 text-gray-500" ref={genderInputRef}>
+                            <select className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none w-5/5 text-gray-500" ref={genderInputRef} required >
                                     <option disabled selected hidden>GENDER</option>    
                                     <option className="text-gray-500" value="male">Male</option>    
                                     <option className="text-gray-500" value="female">Female</option>  
@@ -110,15 +110,15 @@ const NewMemberForm = (props) => {
                         </div>
 
                         <div className="m-2">
-                            <input type="email" className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none text-gray-500"placeholder="EMAIL" ref={emailInputRef}/>
+                            <input type="email" className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none text-gray-500"placeholder="EMAIL" ref={emailInputRef} required />
                         </div>
                     
                         <div className="m-2">
-                            <input type="text" className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none text-gray-500" placeholder="PROFESSION" ref={professionInputRef} />
+                            <input type="text" className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none text-gray-500" placeholder="PROFESSION" ref={professionInputRef} required />
                         </div>
 
                         <div className="m-2">
-                            <select className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none w-5/5 text-gray-500" ref={maritalStatusInputRef}>
+                            <select className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none w-5/5 text-gray-500" ref={maritalStatusInputRef} required>
                                     <option disabled selected hidden>MARITAL STATUS</option>    
                                     <option className="text-gray-500" value="Married">Married</option>    
                                     <option className="text-gray-500" value="Single">Single</option>  
@@ -126,11 +126,11 @@ const NewMemberForm = (props) => {
                         </div>
                     
                         <div className="m-2">
-                            <input type="text" className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none text-gray-500" placeholder="RESIDENCE *" ref={residenceInputRef}/>
+                            <input type="text" className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none text-gray-500" placeholder="RESIDENCE *" ref={residenceInputRef} required />
                         </div>
 
                         <div className="m-2">
-                            <select className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none w-5/5 text-gray-500" ref={ministryInputRef}>
+                            <select className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none w-5/5 text-gray-500" ref={ministryInputRef} required >
                                     <option disabled selected hidden>MINISTRY</option>    
                                     <option className="text-gray-500" value="Men">Men</option>    
                                     <option className="text-gray-500" value="Women">Women</option>  
@@ -139,7 +139,7 @@ const NewMemberForm = (props) => {
                         </div>
                     
                         {/* <div className="m-2">
-                            <select className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none w-5/5 text-gray-500" ref={departmentInputRef}>
+                            <select className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none w-5/5 text-gray-500" ref={departmentInputRef} required >
                                     <option disabled selected hidden>DEPARTMENT(S)</option>    
                                     <option className="text-gray-500" value="Prayer">Prayer</option>    
                                     <option className="text-gray-500" value="Music">Music</option>  
@@ -152,7 +152,7 @@ const NewMemberForm = (props) => {
                         </div>
 
                         <div className="m-2">
-                            <select className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none w-5/5 text-gray-500" ref={roleInputRef}>
+                            <select className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none w-5/5 text-gray-500" ref={roleInputRef} required >
                                     <option disabled selected hidden>ROLE(S)</option>    
                                     <option className="text-gray-500" value="Prayer">Prayer Team Leader</option>    
                                     <option className="text-gray-500" value="Music Director">Music Director</option>  

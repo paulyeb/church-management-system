@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 
-const SeedsTable = () => {
+const SeedsTable = ({ allSeed }) => {
 
     return (
         <table className="text-left my-6 w-full mx-auto">
@@ -17,33 +17,12 @@ const SeedsTable = () => {
                 </tr>
             </thead>
             <tbody>
-                <tr className="hover:bg-gray-100 border border-emerald-500">
-                    <td className=" border-emerald-500 px-3 text-emerald-600 w-9"><input type="checkbox" /></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
-                </tr>
-                <tr className="hover:bg-gray-100 border border-emerald-500">
+                {allSeed.map( seed => <tr className="hover:bg-gray-100 border border-emerald-500" key={seed.id}>
                     <td className="border-emerald-500 px-3 text-emerald-600 w-9"><input type="checkbox" /></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
-                </tr>
-                <tr className="hover:bg-gray-100 border border-emerald-500">
-                    <td className="border-emerald-500 px-3 text-emerald-600 w-9"><input type="checkbox" /></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
-                </tr>
-                <tr className="hover:bg-gray-100 border border-emerald-500">
-                    <td className="border-emerald-500 px-3 text-emerald-600 w-9"><input type="checkbox" /></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
-                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600"></td>
+                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600">{seed.date}</td>
+                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600">{seed.user.name}</td>
+                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600">{seed.amount}</td>
+                    <td className="border border-emerald-500 px-4 py-2 text-emerald-600">{seed.comments}</td>
                     <td className="px-4 py-2 text-emerald-600">
                         <div className="flex flex-row items-centre justify-start">
                             <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full">
@@ -58,6 +37,7 @@ const SeedsTable = () => {
                         </div>
                     </td>
                 </tr>
+                )}
             </tbody>
         </table>
     );
