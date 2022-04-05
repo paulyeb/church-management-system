@@ -1,11 +1,11 @@
+import { useState, useEffect } from "react";
 import Header from "./UI/Header";
 import Sidebar from "./UI/Sidebar";
 import Card from "./UI/Card";
+
 import VisitorsTable from "./UI/Tables/VisitorsTable";
-import NewVisitorForm from "./UI/Modals/ModalForms.js/NewVisitorForm";
-import { useState } from "react";
-import AddRecordButton from "./UI/Button.js/AddRecordButton";
-import { useEffect } from "react";
+import NewVisitorForm from "./UI/Modals/Create/NewVisitorForm";
+import AddRecordButton from "./UI/Button/AddRecordButton";
 
 const Visitors = () => {
     const [newVisitor, setNewVisitor] = useState(false);

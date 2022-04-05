@@ -4,8 +4,8 @@ import Header from "./UI/Header";
 import Sidebar from "./UI/Sidebar";
 import Card from "./UI/Card";
 import ExpenditureTable from "./UI/Tables/ExpenditureTable";
-import RecordExpense from "./UI/Modals/ModalForms.js/RecordExpenditure";
-import AddRecordButton from "./UI/Button.js/AddRecordButton";
+import RecordExpense from "./UI/Modals/Create/RecordExpenditure";
+import AddRecordButton from "./UI/Button/AddRecordButton";
 
 
 const Expenditure = () => {

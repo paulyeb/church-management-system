@@ -1,6 +1,8 @@
+import Link from "next/link";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrashRestoreAlt } from "@fortawesome/free-solid-svg-icons";
 
 const OfferingsTable = ({ offerings }) => {
 
@@ -26,15 +28,28 @@ const OfferingsTable = ({ offerings }) => {
                         <td className="border border-emerald-500 px-4 py-2 text-emerald-600">{offering.comments}</td>
                         <td className="px-4 py-2 text-emerald-600">
                             <div className="flex flex-row items-centre justify-start">
-                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full">
+                                <button 
+                                    className="p-3 hover:bg-gray-300 hover:border-2 rounded-full"
+                                >
                                     <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
                                 </button>
-                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">  
-                                        <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}}/> 
-                                </button>
-                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
-                                    <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
-                                </button>
+                                <Link href={`offering/edit/${offering.id}`}> 
+                                    <a>
+                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
+                                        <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
+                                    </button>
+                                    </a>
+                                </Link> 
+                                {!offering.deleted_at ? <Link href={`offering/delete/${offering.id}`}>
+                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
+                                        <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
+                                    </button>
+                                </Link> :
+                                <Link href={`offering/restore/${offering.id}`}>
+                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
+                                        <FontAwesomeIcon icon = {faTrashRestoreAlt} style={{width: '20px', color: 'black'}}/>
+                                    </button>
+                                </Link>}
                             </div>
                         </td>
                     </tr>

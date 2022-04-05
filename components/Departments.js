@@ -4,7 +4,7 @@ import Header from "./UI/Header";
 import Sidebar from "./UI/Sidebar";
 import Card from "./UI/Card";
 import DepartmentsTable from "./UI/Tables/DepartmentsTable";
-import NewDepartmentForm from "./UI/Modals/ModalForms.js/NewDepartmentForm";
+import NewDepartmentForm from "./UI/Modals/Create/NewDepartmentForm";
 
 const Departments = () => {
     const [newDepartment, setNewDepartment] = useState(false);

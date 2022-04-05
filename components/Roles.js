@@ -4,8 +4,8 @@ import Header from "./UI/Header";
 import Sidebar from "./UI/Sidebar";
 import Card from "./UI/Card";
 import RolesTable from "./UI/Tables/RolesTable";
-import NewRoleForm from "./UI/Modals/ModalForms.js/NewRoleForm";
-import AddRecordButton from "./UI/Button.js/AddRecordButton";
+import NewRoleForm from "./UI/Modals/Create/NewRoleForm";
+import AddRecordButton from "./UI/Button/AddRecordButton";
 
 const Roles = () => {
     const [newRole, setNewRole] = useState(false);

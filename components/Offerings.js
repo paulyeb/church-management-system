@@ -4,8 +4,8 @@ import Header from "./UI/Header";
 import Sidebar from "./UI/Sidebar";
 import Card from "./UI/Card";
 import OfferingsTable from "./UI/Tables/OfferingsTable";
-import RecordOffering from "./UI/Modals/ModalForms.js/RecordOffering";
-import AddRecordButton from "./UI/Button.js/AddRecordButton";
+import RecordOffering from "./UI/Modals/Create/RecordOffering";
+import AddRecordButton from "./UI/Button/AddRecordButton";
 
 
 

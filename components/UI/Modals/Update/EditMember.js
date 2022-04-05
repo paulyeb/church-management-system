@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 
-const EditMemberForm = ({ data, onUpdateMember, onClose }) => {
+const EditMemberForm = ({ data, onUpdateMember }) => {
     const [allFamilies, setFamilies] = useState([]);
 
     const [nameInput, setNameInput] = useState('');
@@ -66,8 +66,6 @@ const EditMemberForm = ({ data, onUpdateMember, onClose }) => {
         }
     
         onUpdateMember(updatedMemberData);
-
-        onClose();
     }
     
     return (

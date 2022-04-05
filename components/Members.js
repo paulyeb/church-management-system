@@ -4,8 +4,8 @@ import Card from "./UI/Card";
 import Sidebar from "./UI/Sidebar";
 
 import MembersTable from "./UI/Tables/MembersTable";
-import NewMemberForm from "./UI/Modals/ModalForms.js/NewMemberForm";
-import AddRecordButton from "./UI/Button.js/AddRecordButton";
+import NewMemberForm from "./UI/Modals/Create/NewMemberForm";
+import AddRecordButton from "./UI/Button/AddRecordButton";
 
 const HomePage = () => {
     const [allMembers, setAllMembers] = useState([]);
@@ -37,7 +37,7 @@ const HomePage = () => {
     const fetchMembersData = () => {
         fetch('http://localhost:8000/api/v1/users')
         .then(res => res.json())
-        .then(data => setAllMembers(data));
+        .then(data => {setAllMembers(data), console.log(data)});
         
         // console.log(allMembers);
     };
@@ -47,6 +47,7 @@ const HomePage = () => {
         
         setNewMemberForm(true);
     }
+
 
     
     
@@ -63,7 +64,7 @@ const HomePage = () => {
                             <div className="font-bold">
                             Members
                             </div>
-                            <div className="mx-4">
+                            <div className="mx-4" >
                                 <input 
                                     type="search" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 

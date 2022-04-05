@@ -3,8 +3,8 @@ import Sidebar from "./UI/Sidebar";
 import Card from "./UI/Card";
 import FamiliesTable from "./UI/Tables/FamiliesTable";
 import { useState, useEffect } from "react";
-import NewFamilyForm from "./UI/Modals/ModalForms.js/NewFamilyForm";
-import AddRecordButton from "./UI/Button.js/AddRecordButton";
+import NewFamilyForm from "./UI/Modals/Create/NewFamilyForm";
+import AddRecordButton from "./UI/Button/AddRecordButton";
 
 const Families = () => {
     const [newFamily, setNewFamily] = useState(false);

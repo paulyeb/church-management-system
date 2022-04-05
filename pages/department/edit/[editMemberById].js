@@ -1,8 +1,8 @@
-import MetaData from "../../components/MetaData";
+import MetaData from "../../../components/MetaData"
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import EditMember from "../../components/UI/Modals/EditEntries.js/EditMember";
-import EditSuccessMessage from "../../components/UI/Modals/EditEntries.js/EditSuccessMessage";
+import EditMember from "../../../components/UI/Modals/EditEntries.js/EditMember";
+import EditSuccessMessage from "../../../components/UI/Modals/EditEntries.js/EditSuccessMessage";
 
 const EditMemberPage = () => {
     const [member, setMember] = useState(null);

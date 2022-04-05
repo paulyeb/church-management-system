@@ -3,8 +3,8 @@ import Header from "./UI/Header";
 import Sidebar from "./UI/Sidebar";
 import Card from "./UI/Card";
 import TitheTable from "./UI/Tables/TitheTable";
-import RecordTithe from "./UI/Modals/ModalForms.js/RecordTithe";
-import AddRecordButton from "./UI/Button.js/AddRecordButton";
+import RecordTithe from "./UI/Modals/Create/RecordTithe";
+import AddRecordButton from "./UI/Button/AddRecordButton";
 
 
 const Tithe = () => {

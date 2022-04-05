@@ -2,10 +2,10 @@ import Header from "./UI/Header";
 import Sidebar from "./UI/Sidebar";
 import Card from "./UI/Card";
 import AttendanceTable from "./UI/Tables/AttendanceTable";
-import RecordAttendanceForm from "./UI/Modals/ModalForms.js/RecordAttendance";
+import AddRecordButton from "./UI/Button/AddRecordButton";
+import RecordAttendanceForm from "./UI/Modals/Create/RecordAttendance";
 
 import { useState, useEffect } from "react";
-import AddRecordButton from "./UI/Button.js/AddRecordButton";
 
 const Attendance = () => {
     const [newAttendance, setNewAttendance] = useState(false);

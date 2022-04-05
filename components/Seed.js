@@ -4,8 +4,8 @@ import Header from "./UI/Header";
 import Sidebar from "./UI/Sidebar";
 import Card from "./UI/Card";
 import SeedsTable from "./UI/Tables/SeedsTable";
-import RecordSeed from "./UI/Modals/ModalForms.js/RecordSeed";
-import AddRecordButton from "./UI/Button.js/AddRecordButton";
+import RecordSeed from "./UI/Modals/Create/RecordSeed";
+import AddRecordButton from "./UI/Button/AddRecordButton";
 
 const Seed = () => {
     const [newSeed, setNewSeed] = useState(false);

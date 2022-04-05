@@ -1,6 +1,8 @@
+import Link from "next/link";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrashRestoreAlt } from "@fortawesome/free-solid-svg-icons";
 
 const SeedsTable = ({ allSeed }) => {
 
@@ -25,15 +27,28 @@ const SeedsTable = ({ allSeed }) => {
                     <td className="border border-emerald-500 px-4 py-2 text-emerald-600">{seed.comments}</td>
                     <td className="px-4 py-2 text-emerald-600">
                         <div className="flex flex-row items-centre justify-start">
-                            <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full">
+                            <button 
+                                className="p-3 hover:bg-gray-300 hover:border-2 rounded-full"
+                            >
                                 <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
                             </button>
-                            <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">  
-                                    <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}}/> 
-                            </button>
-                            <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
-                                <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
-                            </button>
+                            <Link href={`seed/edit/${seed.id}`}> 
+                                <a>
+                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
+                                    <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
+                                </button>
+                                </a>
+                            </Link> 
+                            {!seed.deleted_at ? <Link href={`seed/delete/${seed.id}`}>
+                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
+                                    <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
+                                </button>
+                            </Link> :
+                            <Link href={`seed/restore/${seed.id}`}>
+                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
+                                    <FontAwesomeIcon icon = {faTrashRestoreAlt} style={{width: '20px', color: 'black'}}/>
+                                </button>
+                            </Link>}
                         </div>
                     </td>
                 </tr>
