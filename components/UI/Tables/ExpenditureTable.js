@@ -32,19 +32,19 @@ const ExpenditureTable = ({ allExpenditure }) => {
                                 >
                                     <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
                                 </button>
-                                <Link href={`expenditure/edit/${expenditure.id}`}> 
+                                <Link href={`edit/expenditure/${expenditure.id}`}> 
                                     <a>
                                     <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                         <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
                                     </button>
                                     </a>
                                 </Link> 
-                                {!expenditure.deleted_at ? <Link href={`expenditure/delete/${expenditure.id}`}>
+                                {!expenditure.deleted_at ? <Link href={`delete/expenditure/${expenditure.id}`}>
                                     <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                         <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
                                     </button>
                                 </Link> :
-                                <Link href={`expenditure/restore/${expenditure.id}`}>
+                                <Link href={`restore/expenditure/${expenditure.id}`}>
                                     <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                         <FontAwesomeIcon icon = {faTrashRestoreAlt} style={{width: '20px', color: 'black'}}/>
                                     </button>

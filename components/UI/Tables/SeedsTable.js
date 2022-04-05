@@ -32,19 +32,19 @@ const SeedsTable = ({ allSeed }) => {
                             >
                                 <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
                             </button>
-                            <Link href={`seed/edit/${seed.id}`}> 
+                            <Link href={`edit/seed/${seed.id}`}> 
                                 <a>
                                 <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                     <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
                                 </button>
                                 </a>
                             </Link> 
-                            {!seed.deleted_at ? <Link href={`seed/delete/${seed.id}`}>
+                            {!seed.deleted_at ? <Link href={`delete/seed/${seed.id}`}>
                                 <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                     <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
                                 </button>
                             </Link> :
-                            <Link href={`seed/restore/${seed.id}`}>
+                            <Link href={`restore/seed/${seed.id}`}>
                                 <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                     <FontAwesomeIcon icon = {faTrashRestoreAlt} style={{width: '20px', color: 'black'}}/>
                                 </button>

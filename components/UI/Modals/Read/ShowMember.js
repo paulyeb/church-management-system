@@ -3,8 +3,6 @@ import Link from "next/link";
 
 
 const ShowMemberDetails = ({ data }) => {
-    const [allFamilies, setFamilies] = useState([]);
-
     const [nameInput, setNameInput] = useState('');
     const [familyInput, setFamilyInput] = useState('');
     const [dateOfBirthInput, setDateOfBirthInput] = useState('');
@@ -15,10 +13,6 @@ const ShowMemberDetails = ({ data }) => {
     const [maritalStatusInput, setMaritalStatusInput] = useState('');
     const [residenceInput, setResidenceInput] = useState('');
     const [ministryInput, setMinistryInput] = useState('');
-
-    useEffect(() => {
-        fetchAllFamilies();
-    }, []);
 
     useEffect(() => {
         getMemberData(data);
@@ -40,12 +34,6 @@ const ShowMemberDetails = ({ data }) => {
         setResidenceInput(data.residence);
         setMinistryInput(data.ministry);
     }
-
-    const fetchAllFamilies = () => {
-        fetch('http://localhost:8000/api/v1/families')
-            .then(res => res.json())
-            .then(data => setFamilies(data))
-    };
     
     return (
         data ? <div className="fixed inset-0 bg-gray-500 bg-opacity-70 overflow-y-auto h-full w-full">

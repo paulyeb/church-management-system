@@ -37,19 +37,19 @@ const AttendanceTable = ({ allAttendances }) => {
                                 >
                                     <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
                                 </button>
-                                <Link href={`attendance/edit/${attendance.id}`}> 
+                                <Link href={`edit/attendance/${attendance.id}`}> 
                                     <a>
                                     <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                         <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
                                     </button>
                                     </a>
                                 </Link> 
-                                {!attendance.deleted_at ? <Link href={`attendance/delete/${attendance.id}`}>
+                                {!attendance.deleted_at ? <Link href={`delete/attendance/${attendance.id}`}>
                                     <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                         <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
                                     </button>
                                 </Link> :
-                                <Link href={`attendance/restore/${attendance.id}`}>
+                                <Link href={`restore/attendance/${attendance.id}`}>
                                     <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                         <FontAwesomeIcon icon = {faTrashRestoreAlt} style={{width: '20px', color: 'black'}}/>
                                     </button>

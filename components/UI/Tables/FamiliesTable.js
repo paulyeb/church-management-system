@@ -20,26 +20,26 @@ const FamiliesTable = (props) => {
                     <td className="border border-emerald-500 px-4 py-2 text-emerald-600 w-32">{family.name}</td>
                     <td className="px-4 py-2 text-emerald-600">
                         <div className="flex flex-row items-centre justify-start">
-                            <Link href={`family/edit/${family.id}`}>
+                            <Link href={`edit/family/${family.id}`}>
                                 <a>     
                                     <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full">
                                         <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
                                     </button>
                                 </a>
                             </Link>
-                            <Link href={`family/edit/${family.id}`}> 
+                            <Link href={`edit/family/${family.id}`}> 
                                 <a>
                                 <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                     <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
                                 </button>
                                 </a>
                             </Link> 
-                            {!family.deleted_at ? <Link href={`family/delete/${family.id}`}>
+                            {!family.deleted_at ? <Link href={`delete/family/${family.id}`}>
                                 <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                     <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
                                 </button>
                             </Link> :
-                            <Link href={`family/restore/${family.id}`}>
+                            <Link href={`restore/family/${family.id}`}>
                                 <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                     <FontAwesomeIcon icon = {faTrashRestoreAlt} style={{width: '20px', color: 'black'}}/>
                                 </button>

@@ -33,19 +33,19 @@ const OfferingsTable = ({ offerings }) => {
                                 >
                                     <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
                                 </button>
-                                <Link href={`offering/edit/${offering.id}`}> 
+                                <Link href={`edit/offering/${offering.id}`}> 
                                     <a>
                                     <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                         <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
                                     </button>
                                     </a>
                                 </Link> 
-                                {!offering.deleted_at ? <Link href={`offering/delete/${offering.id}`}>
+                                {!offering.deleted_at ? <Link href={`delete/offering/${offering.id}`}>
                                     <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                         <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
                                     </button>
                                 </Link> :
-                                <Link href={`offering/restore/${offering.id}`}>
+                                <Link href={`restore/offering/${offering.id}`}>
                                     <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                         <FontAwesomeIcon icon = {faTrashRestoreAlt} style={{width: '20px', color: 'black'}}/>
                                     </button>

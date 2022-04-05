@@ -33,19 +33,19 @@ const TitheTable = ({ allTithe }) => {
                                 >
                                     <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
                                 </button>
-                                <Link href={`tithe/edit/${tithe.id}`}> 
+                                <Link href={`edit/tithe/${tithe.id}`}> 
                                     <a>
                                     <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                         <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
                                     </button>
                                     </a>
                                 </Link> 
-                                {!tithe.deleted_at ? <Link href={`tithe/delete/${tithe.id}`}>
+                                {!tithe.deleted_at ? <Link href={`delete/tithe/${tithe.id}`}>
                                     <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                         <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
                                     </button>
                                 </Link> :
-                                <Link href={`tithe/restore/${tithe.id}`}>
+                                <Link href={`restore/tithe/${tithe.id}`}>
                                     <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                         <FontAwesomeIcon icon = {faTrashRestoreAlt} style={{width: '20px', color: 'black'}}/>
                                     </button>

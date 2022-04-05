@@ -25,26 +25,26 @@ const MembersTable = (props) => {
                             <td className="px-4 py-2 text-emerald-600">{member.family?.name}</td>
                             <td className="px-4 py-2 text-emerald-600">
                                 <div className="flex flex-row items-centre justify-start">
-                                    <Link href={`member/show/${member.id}`}>
+                                    <Link href={`show/member/${member.id}`}>
                                         <a>
                                             <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full">
                                                 <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
                                             </button>
                                         </a>
                                     </Link>
-                                    <Link href={`member/edit/${member.id}`}> 
+                                    <Link href={`edit/member/${member.id}`}> 
                                         <a>
                                         <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                             <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
                                         </button>
                                         </a>
                                     </Link> 
-                                    {!member.deleted_at ? <Link href={`member/delete/${member.id}`}>
+                                    {!member.deleted_at ? <Link href={`delete/member/${member.id}`}>
                                         <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                             <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
                                         </button>
                                     </Link> :
-                                     <Link href={`member/restore/${member.id}`}>
+                                     <Link href={`restore/member/${member.id}`}>
                                         <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                             <FontAwesomeIcon icon = {faTrashRestoreAlt} style={{width: '20px', color: 'black'}}/>
                                         </button>
