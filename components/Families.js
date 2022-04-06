@@ -7,12 +7,13 @@ import NewFamilyForm from "./UI/Modals/Create/NewFamilyForm";
 import AddRecordButton from "./UI/Button/AddRecordButton";
 
 const Families = () => {
+    const [allFamilies, setAllFamilies] = useState([]);
+    const [filteredFamily, setFilteredFamily] = useState('');
     const [newFamily, setNewFamily] = useState(false);
 
     const newFamilyHandler = () => {
         setNewFamily(true);
     }
-    const [allFamilies, setAllFamilies] = useState([]);
 
     useEffect(() => {
         fetchFamiliesData();
@@ -40,9 +41,16 @@ const Families = () => {
         fetch('http://localhost:8000/api/v1/families')
         .then(res => res.json())
         .then(data => setAllFamilies(data));
-        
-        // console.log(allFamilies);
     };
+
+    const filteredFamilyHandler = (e) => {
+        setFilteredFamily(e.target.value);
+    }
+
+    const filteredData = allFamilies.filter( family => {
+        return family.name.includes(filteredFamily);
+    })
+
     return (
         <>
             <Header />
@@ -59,7 +67,8 @@ const Families = () => {
                                 <input 
                                     type="search" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
-                                    placeholder="Search" 
+                                    placeholder="Search by name"
+                                    onChange={filteredFamilyHandler} 
                                 />
                                 <AddRecordButton onClick={newFamilyHandler}>
                                     NEW FAMILY
@@ -67,7 +76,7 @@ const Families = () => {
                             </div>
                         </div>
                         <div className="container px-4">
-                            <FamiliesTable families={allFamilies} />
+                            <FamiliesTable families={filteredData} />
                         </div>
                     </Card>
                 </div>

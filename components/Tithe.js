@@ -8,14 +8,14 @@ import AddRecordButton from "./UI/Button/AddRecordButton";
 
 
 const Tithe = () => {
+    const [allTithe, setAllTithe] = useState([]);
     const [newTithe, setNewTithe] = useState(false);
+    const [filteredYear, setFilteredYear] = useState('');
 
     const recordTitheHandler = () => {
         setNewTithe(true);
     }    
     
-    const [allTithe, setAllTithe] = useState([]);
-
     useEffect(() => {
         fetchTithes();
     }, []);
@@ -42,7 +42,17 @@ const Tithe = () => {
             .then(res => res.json())
             .then(data => setAllTithe(data));
     }
-
+    
+    const filterYearHandler = (e) => {
+        setFilteredYear(e.target.value)
+        console.log(e.target.value)
+    }
+    
+    const filteredData = allTithe.filter( tithe => {
+        return tithe.date.includes(filteredYear);
+    })
+    
+    
     return (
         <>
             <Header />
@@ -60,6 +70,7 @@ const Tithe = () => {
                                     type="date" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
                                     placeholder="Search by date" 
+                                    onChange={filterYearHandler}
                                 />
                                 <AddRecordButton onClick={recordTitheHandler}>
                                     RECORD TITHE
@@ -67,7 +78,7 @@ const Tithe = () => {
                             </div>
                         </div>
                         <div className="container px-4">
-                            <TitheTable allTithe = { allTithe } />
+                            <TitheTable allTithe = { filteredData } />
                         </div>
                     </Card>
                 </div>

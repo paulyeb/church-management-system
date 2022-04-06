@@ -81,18 +81,17 @@ const ShowMemberDetails = ({ data }) => {
                         <div className="m-2 p-2">           
                             {`Ministry: ${ministryInput}`}
                         </div>
-
-                        <div></div>
+                        </div>
                        
-                        <div className="flex flex-row items-centre justify-end p-2">
+                        <div className="flex flex-row items-centre justify-end mr-10 p-2">
                             
                             <Link href='/'>
                                 <button className="text-white bg-pink-700 hover:bg-xl:w-96 pink-80 0 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg px-5 py-1.5 text-center dark:bg-pink-500 dark:hover:bg-pink-700 dark:focus:ring-xl:w-96 pink-80 0 ml-40" type="button" >
-                                    BACK
+                                    EXIT
                                 </button>  
                             </Link>
                         </div>
-                    </div>
+                    
                 </form>
             </div>    
         </div>

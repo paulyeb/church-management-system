@@ -8,13 +8,13 @@ import RecordSeed from "./UI/Modals/Create/RecordSeed";
 import AddRecordButton from "./UI/Button/AddRecordButton";
 
 const Seed = () => {
+    const [seeds, setSeed] = useState([]);
     const [newSeed, setNewSeed] = useState(false);
+    const [filteredYear, setFilteredYear] = useState('');
 
     const recordSeedHandler = () => {
         setNewSeed(true);
     }
-
-    const [seed, setSeed] = useState([]);
 
     useEffect(() => {
         fetchSeeds();
@@ -43,6 +43,16 @@ const Seed = () => {
             .then(data => setSeed(data));
     }
 
+    
+    const filterYearHandler = (e) => {
+        setFilteredYear(e.target.value)
+        console.log(e.target.value)
+    }
+    
+    const filteredData = seeds.filter( seed => {
+        return seed.date.includes(filteredYear);
+    })
+    
     return (
         <>
             <Header />
@@ -60,6 +70,7 @@ const Seed = () => {
                                     type="date" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
                                     placeholder="Search by date" 
+                                    onChange={filterYearHandler}
                                 />
                                 <AddRecordButton onClick={recordSeedHandler}>
                                     RECORD SEED
@@ -67,7 +78,7 @@ const Seed = () => {
                             </div>
                         </div>
                         <div className="container px-4">
-                            <SeedsTable allSeed = {seed} />
+                            <SeedsTable allSeed = {filteredData} />
                         </div>
                     </Card>
                 </div>

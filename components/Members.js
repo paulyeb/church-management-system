@@ -10,6 +10,8 @@ import AddRecordButton from "./UI/Button/AddRecordButton";
 const HomePage = () => {
     const [allMembers, setAllMembers] = useState([]);
 
+    const [filteredName, setFilteredName] = useState('');
+
     const [newMemberForm, setNewMemberForm] = useState(false);
 
     useEffect(() => {
@@ -47,10 +49,18 @@ const HomePage = () => {
         
         setNewMemberForm(true);
     }
-
-
     
-    
+    const filterByNameHandler = (e) => {
+        setFilteredName(e.target.value);
+    }
+
+    const filteredData = allMembers.filter( member => {
+        return member.name.includes(filteredName)
+        }
+    )
+
+    console.log(filteredData);
+
     return (
         <>
             <Header />
@@ -69,6 +79,7 @@ const HomePage = () => {
                                     type="search" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
                                     placeholder="Search by Name"
+                                    onChange={filterByNameHandler}
                                 />
                                 <AddRecordButton onClick = {newMemberFormHandler}>
                                     NEW MEMBER
@@ -76,7 +87,7 @@ const HomePage = () => {
                             </div>
                         </div>
                         <div className="container px-4">
-                            <MembersTable memberDetails = {allMembers} />
+                            <MembersTable memberDetails = {filteredData} />
                         </div>
                     </Card>
                 </div>

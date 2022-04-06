@@ -9,14 +9,14 @@ import AddRecordButton from "./UI/Button/AddRecordButton";
 
 
 const Expenditure = () => {
+    const [expenditure, setExpenditure] = useState([]);
     const [newExpense, setNewExpense] = useState(false);
+    const [filteredYear, setFilteredYear] = useState('');
 
     const recordExpenseHandler = () => {
         setNewExpense(true);
     }    
     
-    const [expenditure, setExpenditure] = useState([]);
-
     useEffect(() => {
         fetchExpenditureList();
     }, []);
@@ -43,6 +43,15 @@ const Expenditure = () => {
             .then(res => res.json())
             .then(data => setExpenditure(data));
     }
+    
+    const filterYearHandler = (e) => {
+        setFilteredYear(e.target.value)
+        console.log(e.target.value)
+    }
+
+    const filteredData = expenditure.filter( expense => {
+        return expense.date.includes(filteredYear);
+    })
 
     return (
         <>
@@ -61,6 +70,7 @@ const Expenditure = () => {
                                     type="date" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
                                     placeholder="Search by date" 
+                                    onChange={filterYearHandler}
                                 />
                                 <AddRecordButton onClick={recordExpenseHandler}>
                                     RECORD EXPENDITURE
@@ -68,7 +78,7 @@ const Expenditure = () => {
                             </div>
                         </div>
                         <div className="container px-4">
-                            <ExpenditureTable allExpenditure = {expenditure} />
+                            <ExpenditureTable allExpenditure = {filteredData} />
                         </div>
                     </Card>
                 </div>

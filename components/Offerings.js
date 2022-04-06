@@ -10,13 +10,13 @@ import AddRecordButton from "./UI/Button/AddRecordButton";
 
 
 const Offering = () => {
+    const [offerings, setOfferings] = useState([]);
     const [newOffering, setNewOffering] = useState(false);
+    const [filteredYear, setFilteredYear] = useState('');
 
     const recordOfferingHandler = () => {
         setNewOffering(true);
     }
-
-    const [offerings, setOfferings] = useState([]);
 
     useEffect(() => {
         fetchOfferings();
@@ -45,6 +45,17 @@ const Offering = () => {
             .then(data => setOfferings(data));
     }
 
+    
+    const filterYearHandler = (e) => {
+        setFilteredYear(e.target.value)
+        console.log(e.target.value)
+    }
+    
+    const filteredData = offerings.filter( offering => {
+        return offering.date.includes(filteredYear);
+    })
+    
+    
     return (
         <>
             <Header />
@@ -62,14 +73,15 @@ const Offering = () => {
                                     type="date" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
                                     placeholder="Search by date" 
-                                />
+                                    onChange={filterYearHandler}
+                                    />
                                 <AddRecordButton onClick={recordOfferingHandler}>
                                     RECORD OFFERING
                                 </AddRecordButton>
                             </div>
                         </div>
                         <div className="container px-4">
-                           <OfferingsTable offerings = {offerings} /> 
+                           <OfferingsTable offerings = {filteredData} /> 
                         </div>
                     </Card>
                 </div>

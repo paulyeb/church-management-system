@@ -8,8 +8,9 @@ import NewVisitorForm from "./UI/Modals/Create/NewVisitorForm";
 import AddRecordButton from "./UI/Button/AddRecordButton";
 
 const Visitors = () => {
-    const [newVisitor, setNewVisitor] = useState(false);
     const [allVisitors, setAllVisitors] = useState([]);
+    const [filteredName, setFilteredName] = useState('');
+    const [newVisitor, setNewVisitor] = useState(false);
 
 
     const newVisitorHandler = () => {
@@ -43,6 +44,15 @@ const Visitors = () => {
             .then(res => res.json())
             .then(data => setAllVisitors(data))
     }
+
+    const filteredNameHandler = (e) => {
+        setFilteredName(e.target.value);
+    }
+
+    const filteredData = allVisitors.filter( visitor => {
+        return visitor.name.includes(filteredName);
+    })
+
     return (
         <>
             <Header />
@@ -60,6 +70,7 @@ const Visitors = () => {
                                     type="date" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
                                     placeholder="Search by name" 
+                                    onChange={filteredNameHandler}
                                 />
                                 <AddRecordButton onClick={newVisitorHandler}>
                                     RECORD VISITOR
@@ -67,7 +78,7 @@ const Visitors = () => {
                             </div>
                         </div>
                         <div className="container px-4">
-                          <VisitorsTable allVisitors={allVisitors} />  
+                          <VisitorsTable allVisitors={filteredData} />  
                         </div>
                     </Card>
                 </div>

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faPen, faTrashRestoreAlt } from "@fortawesome/free-solid-svg-icons";
 
-const MembersTable = (props) => {
+const MembersTable = ({memberDetails}) => {
 
     return ( 
         <>
@@ -18,7 +18,7 @@ const MembersTable = (props) => {
                 </tr>
             </thead>
             <tbody>
-                { props.memberDetails.map( member => 
+                { memberDetails.map( member => 
                         <tr className="hover:bg-gray-100 border border-emerald-500" key = {member.id}>          
                             <td className="px-4 py-2 text-emerald-600">{member.name}</td>
                             <td className="px-4 py-2 text-emerald-600">{member.phone_number}</td>

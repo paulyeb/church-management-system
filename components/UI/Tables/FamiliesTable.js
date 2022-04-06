@@ -20,7 +20,7 @@ const FamiliesTable = (props) => {
                     <td className="border border-emerald-500 px-4 py-2 text-emerald-600 w-32">{family.name}</td>
                     <td className="px-4 py-2 text-emerald-600">
                         <div className="flex flex-row items-centre justify-start">
-                            <Link href={`edit/family/${family.id}`}>
+                            <Link href={`show/family/${family.id}`}>
                                 <a>     
                                     <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full">
                                         <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>

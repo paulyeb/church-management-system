@@ -8,17 +8,18 @@ import RecordAttendanceForm from "./UI/Modals/Create/RecordAttendance";
 import { useState, useEffect } from "react";
 
 const Attendance = () => {
+    const [attendances, setAttendances] = useState([]);
     const [newAttendance, setNewAttendance] = useState(false);
-
+    const [filteredYear, setFilteredYear] = useState('');
+    
     const recordAttendanceHandler = () => {
         setNewAttendance(true);
     }
-    const [attendances, setAttendances] = useState([]);
-
+    
     useEffect(() => {
         fetchAllAttendance();
     }, []);
-
+    
     const saveAttendanceHandler = (attendanceRecord) => {
         fetch("http://localhost:8000/api/v1/attendances/", {
             method: "POST",
@@ -34,9 +35,20 @@ const Attendance = () => {
     }
     const fetchAllAttendance = () => {
         fetch("http://localhost:8000/api/v1/attendances/")
-            .then(res => res.json())
-            .then(data => setAttendances(data));
+        .then(res => res.json())
+        .then(data => setAttendances(data));
     }
+    
+    const filterYearHandler = (e) => {
+        setFilteredYear(e.target.value)
+        console.log(e.target.value)
+    }
+
+    const filteredData = attendances.filter( attendance => {
+        return attendance.date.includes(filteredYear);
+    })
+
+    
 
     return (
         <>
@@ -54,7 +66,8 @@ const Attendance = () => {
                                 <input 
                                     type="date" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
-                                    placeholder="Search by date" 
+                                    placeholder="Search by date"
+                                    onChange={filterYearHandler} 
                                 />
                                 <AddRecordButton onClick={recordAttendanceHandler}>
                                     RECORD ATTENDANCE
@@ -62,7 +75,7 @@ const Attendance = () => {
                             </div>
                         </div>
                         <div className="container px-4">
-                            <AttendanceTable allAttendances={attendances}/>
+                            <AttendanceTable allAttendances={filteredData} />
                         </div>
                     </Card>
                 </div>
