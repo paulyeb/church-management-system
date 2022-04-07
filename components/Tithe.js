@@ -11,6 +11,7 @@ const Tithe = () => {
     const [allTithe, setAllTithe] = useState([]);
     const [newTithe, setNewTithe] = useState(false);
     const [filteredYear, setFilteredYear] = useState('');
+    const [filteredMember, setFilteredMember] = useState('');
 
     const recordTitheHandler = () => {
         setNewTithe(true);
@@ -43,15 +44,24 @@ const Tithe = () => {
             .then(data => setAllTithe(data));
     }
     
+    const filterMemberHandler = (e) => {
+        setFilteredMember(e.target.value);
+    }
+
     const filterYearHandler = (e) => {
         setFilteredYear(e.target.value)
         console.log(e.target.value)
     }
     
-    const filteredData = allTithe.filter( tithe => {
-        return tithe.date.includes(filteredYear);
-    })
-    
+    const filteredData = filteredYear ? 
+            allTithe.filter( tithe => {
+                return tithe.date.includes(filteredYear);
+                }
+            ) : 
+        filteredMember ? allTithe.filter( tithe => {
+            return tithe.user.name.includes(filteredMember)
+            }
+        ) : allTithe
     
     return (
         <>
@@ -66,6 +76,12 @@ const Tithe = () => {
                             Tithes
                             </div>
                             <div className="mx-4">
+                                <input 
+                                    type="text" 
+                                    className="border-2 rounded p-1 mx-2 focus:outline-none" 
+                                    placeholder="Search by member" 
+                                    onChange={filterMemberHandler}
+                                />
                                 <input 
                                     type="date" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 

@@ -10,6 +10,7 @@ import AddRecordButton from "./UI/Button/AddRecordButton";
 const Visitors = () => {
     const [allVisitors, setAllVisitors] = useState([]);
     const [filteredName, setFilteredName] = useState('');
+    const [filteredDate, setFilteredDate] = useState('');
     const [newVisitor, setNewVisitor] = useState(false);
 
 
@@ -49,9 +50,15 @@ const Visitors = () => {
         setFilteredName(e.target.value);
     }
 
-    const filteredData = allVisitors.filter( visitor => {
+    const filteredDateHandler = (e) => {
+        setFilteredDate(e.target.value);
+    }
+
+    const filteredData = filteredName ? allVisitors.filter( visitor => {
         return visitor.name.includes(filteredName);
-    })
+    }) : filteredDate ? allVisitors.filter( visitor => {
+        return visitor.date.includes(filteredDate);
+    }) : allVisitors
 
     return (
         <>
@@ -67,10 +74,16 @@ const Visitors = () => {
                             </div>
                             <div className="mx-4">
                                 <input 
-                                    type="date" 
+                                    type="text" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
                                     placeholder="Search by name" 
                                     onChange={filteredNameHandler}
+                                />
+                                <input 
+                                    type="date" 
+                                    className="border-2 rounded p-1 mx-2 focus:outline-none" 
+                                    placeholder="Search by date" 
+                                    onChange={filteredDateHandler}
                                 />
                                 <AddRecordButton onClick={newVisitorHandler}>
                                     RECORD VISITOR
