@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowAltCircleUp, faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import Header from "./UI/Header";
 import Card from "./UI/Card";
 import Sidebar from "./UI/Sidebar";
@@ -9,10 +11,12 @@ import AddRecordButton from "./UI/Button/AddRecordButton";
 
 const HomePage = () => {
     const [allMembers, setAllMembers] = useState([]);
-
     const [filteredName, setFilteredName] = useState('');
-
     const [newMemberForm, setNewMemberForm] = useState(false);
+    const [ascendButton, setAscendButton] = useState(true);
+    const [descendButton, setDescendButton] = useState(false);
+    const [membersInAscendingOrder, setMembersInAscendingOrder] = useState('');
+    const [membersInDescendingInOrder, setMembersInDescendingOrder] = useState('');
 
     useEffect(() => {
         fetchMembersData();
@@ -54,12 +58,31 @@ const HomePage = () => {
         setFilteredName(e.target.value);
     }
 
-    const filteredData = allMembers.filter( member => {
-        return member.name.includes(filteredName)
-        }
-    )
+    console.log(allMembers.name);
 
-    console.log(filteredData);
+    // console.log(filteredAndSortedData);
+
+    const ascendHandler = () => {
+        setMembersInAscendingOrder(allMembers.sort());
+        setDescendButton(true);
+        setAscendButton(false);
+    }
+
+    const descendHandler = () => {
+        setMembersInDescendingOrder(allMembers.sort().reverse());
+        setAscendButton(true);
+        setDescendButton(false);
+    }
+
+    const filteredAndSortedData = 
+        membersInAscendingOrder ? 
+        membersInAscendingOrder :
+        membersInDescendingInOrder ? 
+        membersInDescendingInOrder : 
+        allMembers.filter( member => {
+            return member.name.includes(filteredName)
+        } 
+    )
 
     return (
         <>
@@ -72,9 +95,29 @@ const HomePage = () => {
                         
                         <div className="flex flex-row items-centre justify-between p-4">
                             <div className="font-bold">
-                            Members
+                                Members
                             </div>
                             <div className="mx-4" >
+                                { ascendButton && <span className="inline-flex">
+                                    Sort
+                                    <button onClick={ascendHandler}>
+                                        <FontAwesomeIcon 
+                                            icon = {faArrowUp} 
+                                            style={{width: '20px', color: 'black', marginInline: '10px'}}
+                                        />
+                                    </button>
+                                </span>}
+                                        
+                                {descendButton && <span className="inline-flex">
+                                    Sort
+                                    <button onClick={descendHandler}>
+                                        <FontAwesomeIcon 
+                                            icon = {faArrowDown} 
+                                            style={{width: '20px', color: 'black', marginInline: '10px'}}
+                                        />
+                                    </button>
+                                </span>}
+
                                 <input 
                                     type="search" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
@@ -87,7 +130,7 @@ const HomePage = () => {
                             </div>
                         </div>
                         <div className="container px-4">
-                            <MembersTable memberDetails = {filteredData} />
+                            <MembersTable memberDetails = {filteredAndSortedData} />
                         </div>
                     </Card>
                 </div>

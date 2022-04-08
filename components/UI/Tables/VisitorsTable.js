@@ -28,20 +28,13 @@ const VisitorsTable = ({ allVisitors }) => {
                         <td className="border border-emerald-500 px-4 py-4 text-emerald-600">{visitor.comments}</td>
                         <td className="px-4 py-2 text-emerald-600">
                             <div className="flex flex-row items-centre justify-start">
-                                <Link href={`edit/visitor/${visitor.id}`}>
-                                    <a>
-                                        <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full">
-                                            <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
-                                        </button>
-                                    </a>
-                                </Link>
                                 <Link href={`edit/visitor/${visitor.id}`}> 
                                     <a>
-                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
+                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full">
                                         <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
                                     </button>
                                     </a>
-                                </Link> 
+                                </Link>
                                 {!visitor.deleted_at ? <Link href={`delete/visitor/${visitor.id}`}>
                                     <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
                                         <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>

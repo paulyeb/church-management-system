@@ -11,6 +11,7 @@ const Seed = () => {
     const [seeds, setSeed] = useState([]);
     const [newSeed, setNewSeed] = useState(false);
     const [filteredYear, setFilteredYear] = useState('');
+    const [filteredMember, setFilteredMember] = useState('');
 
     const recordSeedHandler = () => {
         setNewSeed(true);
@@ -43,15 +44,22 @@ const Seed = () => {
             .then(data => setSeed(data));
     }
 
-    
-    const filterYearHandler = (e) => {
-        setFilteredYear(e.target.value)
-        console.log(e.target.value)
+    const filterMemberHandler = (e) => {
+        setFilteredMember(e.target.value);
     }
     
-    const filteredData = seeds.filter( seed => {
-        return seed.date.includes(filteredYear);
-    })
+    const filterYearHandler = (e) => {
+        setFilteredYear(e.target.value);
+    }
+    
+    const filteredData = filteredYear ? 
+        seeds.filter( seed => {
+            return seed.date.includes(filteredYear);
+        }) : 
+        filteredMember ? seeds.filter( seed => {
+            return seed.user.name.includes(filteredMember);
+        }) : 
+    seeds
     
     return (
         <>
@@ -66,6 +74,12 @@ const Seed = () => {
                             Seeds
                             </div>
                             <div className="mx-4">
+                                <input 
+                                    type="text" 
+                                    className="border-2 rounded p-1 mx-2 focus:outline-none" 
+                                    placeholder="Search by member" 
+                                    onChange={filterMemberHandler}
+                                />
                                 <input 
                                     type="date" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 

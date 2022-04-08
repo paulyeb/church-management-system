@@ -54,11 +54,16 @@ const Visitors = () => {
         setFilteredDate(e.target.value);
     }
 
-    const filteredData = filteredName ? allVisitors.filter( visitor => {
-        return visitor.name.includes(filteredName);
-    }) : filteredDate ? allVisitors.filter( visitor => {
-        return visitor.date.includes(filteredDate);
-    }) : allVisitors
+    const filteredData = filteredName ? 
+        allVisitors.filter( visitor => {
+            return visitor.name.includes(filteredName);
+            }
+        ) : 
+        filteredDate ? allVisitors.filter( visitor => {
+            return visitor.date.includes(filteredDate);
+            }
+        ) : 
+        allVisitors
 
     return (
         <>
