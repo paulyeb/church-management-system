@@ -136,7 +136,7 @@ const Families = () => {
                                 modelName={'families'}
                                 dismissRestoreModal={() => setRestoreFamily(false)} 
                                 successMessage={() => setSuccessfulRestore(true)}
-                                fetchModelsData={() => fetchFamiliesData()} 
+                                fetchModelData={() => fetchFamiliesData()} 
                             /> 
                         
                         }

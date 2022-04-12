@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Backdrop from "../Backdrop";
 
 const UpdateFamilyModal = ({ family, dismissModal, successMessage, fetchFamilies }) => {
     const [nameInput, setNameInput] = useState('');
@@ -42,8 +43,7 @@ const UpdateFamilyModal = ({ family, dismissModal, successMessage, fetchFamilies
     }
     
     return (
-        family ? <div className="fixed inset-0 bg-gray-500 bg-opacity-70 overflow-y-auto h-full w-full">
-            <div className="relative top-20 text-gray-500 mx-auto p-5 border 2xl:w-2/4 xl:w-3/4 lg:w-3/4 md:w-4/4 sm:w-4/4 xs:w-2/4 shadow-2xl rounded-2xl bg-white">
+        family ? <Backdrop>
             <form onSubmit={submitFormHandler}>
                     <p className="text-center text-gray-500 font-light text-3xl">Update Family Name</p>
                     <hr className=" my-3 mx-12"/>
@@ -73,8 +73,7 @@ const UpdateFamilyModal = ({ family, dismissModal, successMessage, fetchFamilies
                         </div>
                     </div>
                 </form>
-            </div>    
-        </div>
+            </Backdrop>
         : <div>Loading family data, please wait...</div>
     )
 }

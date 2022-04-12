@@ -6,12 +6,26 @@ import Card from "./UI/Card";
 import VisitorsTable from "./UI/Tables/VisitorsTable";
 import NewVisitorForm from "./UI/Modals/Create/NewVisitorForm";
 import AddRecordButton from "./UI/Button/AddRecordButton";
+import UpdateVisitor from "./UI/Modals/Update/UpdateVisitor";
+import DisplayUpdateSuccessMessage from "./UI/Modals/Update/SuccessMessage/DisplaySuccessMessage";
+import DeleteRecord from "./UI/Modals/Delete/DeleteRecord";
+import DeleteSuccessMessage from "./UI/Modals/Delete/DeleteSuccessMessage";
+import RestoreRecord from "./UI/Modals/Restore/RestoreRecord";
+import SuccessfulRestoreMessage from "./UI/Modals/Restore/RestoreSuccessMessage";
 
 const Visitors = () => {
     const [allVisitors, setAllVisitors] = useState([]);
     const [filteredName, setFilteredName] = useState('');
     const [filteredDate, setFilteredDate] = useState('');
     const [newVisitor, setNewVisitor] = useState(false);
+    const [showVisitor, setShowVisitor] = useState(false);
+    const [editVisitor, setEditVisitor] = useState(false);
+    const [deleteVisitor, setDeleteVisitor] = useState(false);
+    const [restoreVisitor, setRestoreVisitor] = useState(false);
+    const [visitorToReceiveAction, setVisitorToReceiveAction] = useState(null);
+    const [successfulDelete, setSuccessfulDelete] = useState(false);
+    const [successfulUpdate, setSuccessfulUpdate] = useState(false);
+    const [successfulRestore, setSuccessfulRestore] = useState(false);
 
 
     const newVisitorHandler = () => {
@@ -95,8 +109,61 @@ const Visitors = () => {
                                 </AddRecordButton>
                             </div>
                         </div>
+                        {
+                            editVisitor && 
+                            <UpdateVisitor 
+                                visitor={visitorToReceiveAction}
+                                dismissModal={() => setEditVisitor(false)}
+                                successMessage={() => setSuccessfulUpdate(true)}   
+                                fetchVisitors={() => fetchVisitors()}
+                            />
+                        }
+                        {
+                            successfulUpdate && 
+                            <DisplayUpdateSuccessMessage
+                                title={visitorToReceiveAction.name.toUpperCase()}
+                                dismissSuccessMessage={() => setSuccessfulUpdate(false)}
+                            />
+                        }
+
+                        {
+                            deleteVisitor && 
+                            <DeleteRecord 
+                                modelName={'visitors'}
+                                record={visitorToReceiveAction}
+                                dismissDeleteModal={() => setDeleteVisitor(false)}
+                                fetchModelData={() => fetchVisitors()}
+                                setSuccessMessage={() => setSuccessfulDelete(true)} 
+                            />
+                        }
+                        {successfulDelete && <DeleteSuccessMessage title={visitorToReceiveAction.name.toUpperCase()} dismissSuccessMessage={() => setSuccessfulDelete(false)} />}
+
+                        {
+                            restoreVisitor && 
+                            <RestoreRecord 
+                                record={visitorToReceiveAction}
+                                modelName={'visitors'}
+                                dismissRestoreModal={() => setRestoreVisitor(false)}
+                                fetchModelData={() => fetchVisitors()}
+                                successMessage={() => setSuccessfulRestore(true)}
+                            />
+                        }
+                        {
+                            successfulRestore && 
+                            <SuccessfulRestoreMessage 
+                                title={visitorToReceiveAction.name.toUpperCase()}
+                                dismissSuccessMessage={() => setSuccessfulRestore(false)}
+                            />
+                        }
                         <div className="container px-4">
-                          <VisitorsTable allVisitors={filteredData} />  
+                          <VisitorsTable 
+                            allVisitors={filteredData} 
+                            showVisitor={() => setShowVisitor(true)}
+                            editVisitor={() => setEditVisitor(true)}
+                            deleteVisitor={() => setDeleteVisitor(true)}
+                            restoreVisitor={() => setRestoreVisitor(true)}
+                            actionCallback={(visitor) => setVisitorToReceiveAction(visitor)}
+                        />  
                         </div>
                     </Card>
                 </div>

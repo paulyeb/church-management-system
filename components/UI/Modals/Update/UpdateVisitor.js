@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import Backdrop from "../Backdrop";
 
-
-const EditVisitor = ({ data, onUpdateVisitor }) => {
+const UpdateVisitor = ({ visitor, dismissModal, successMessage, fetchVisitors }) => {
     const [dateInput, setDateInput] = useState('');
     const [nameInput, setNameInput] = useState('');
     const [phoneInput, setPhoneInput] = useState('');
@@ -10,21 +9,21 @@ const EditVisitor = ({ data, onUpdateVisitor }) => {
     const [commentsInput, setCommentsInput] = useState('');
 
     useEffect(() => {
-        getExistingVisitorData(data);
-    }, [data]);
+        getExistingVisitorData(visitor);
+    }, [visitor]);
 
-    const getExistingVisitorData = (data) => {
-        if (!data) {
+    const getExistingVisitorData = (visitor) => {
+        if (!visitor) {
             return;
         }
 
-        console.log(data)
+        console.log(visitor)
 
-        setDateInput(data.date);
-        setNameInput(data.name);
-        setPhoneInput(data.phone_number);
-        setPurposeInput(data.purpose_of_visit);
-        setCommentsInput(data.comments);
+        setDateInput(visitor.date);
+        setNameInput(visitor.name);
+        setPhoneInput(visitor.phone_number);
+        setPurposeInput(visitor.purpose_of_visit);
+        setCommentsInput(visitor.comments);
     }
 
     const submitFormHandler = (e) => {
@@ -38,12 +37,27 @@ const EditVisitor = ({ data, onUpdateVisitor }) => {
             comments: commentsInput,
         }
     
-        onUpdateVisitor(updatedVisitorRecord);
+        fetch(`http://localhost:8000/api/v1/visitors/${visitor.id}`, {
+            method: "PUT",
+            mode: "cors",
+            body: JSON.stringify(updatedVisitorRecord),
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                dismissModal();
+                successMessage();
+                fetchVisitors();
+            })
     }
     
     return (
-        data ? <div className="fixed inset-0 bg-gray-500 bg-opacity-70 overflow-y-auto h-full w-full">
-            <div className="relative text-gray-500 top-10 mx-auto p-5 border 2xl:w-2/4 xl:w-3/4 lg:w-3/4 md:w-4/4 sm:w-4/4 xs:w-2/4 shadow-2xl rounded-2xl bg-white">
+        visitor ? <Backdrop>
             <form onSubmit={submitFormHandler}>
                     <p className="text-center  font-light text-3xl">Update Visitor Record</p>
                     <hr className=" my-3 mx-12"/>
@@ -115,23 +129,22 @@ const EditVisitor = ({ data, onUpdateVisitor }) => {
                             
                         </div>
                         <div className="flex flex-row items-centre justify-end ">
-                            
-                            <Link href='/visitors'>
-                                <button className="text-white bg-pink-700 hover:bg-xl:w-96 pink-80 0 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg px-5 py-1.5 text-center dark:bg-pink-500 dark:hover:bg-pink-700 dark:focus:ring-xl:w-96 pink-80 0 mx-2" type="button" >
-                                    Cancel
-                                </button>  
-                            </Link>
-
+                            <button 
+                                className="text-white bg-pink-700 hover:bg-xl:w-96 pink-80 0 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg px-5 py-1.5 text-center dark:bg-pink-500 dark:hover:bg-pink-700 dark:focus:ring-xl:w-96 pink-80 0 mx-2" 
+                                type="button" 
+                                onClick={dismissModal}
+                            >
+                                Cancel
+                            </button>  
                             <button className="text-white bg-green-700 hover:bg-xl:w-96 green-80 0 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-5 py-1.5 text-center dark:bg-green-500 dark:hover:bg-green-700 dark:focus:ring-xl:w-96 green-80 0 mx-2" type="submit">
                                 Save
                             </button>
                         </div>
                     </div>
                 </form>
-            </div>    
-        </div>
-        : <div>Loading member data, please wait...</div>
+            </Backdrop>
+        : <div>Loading visitor data, please wait...</div>
     )
 }
 
-export default EditVisitor;
+export default UpdateVisitor;

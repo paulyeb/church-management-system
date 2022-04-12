@@ -153,7 +153,7 @@ const HomePage = () => {
                                 record={memberToReceiveAction} 
                                 dismissDeleteModal={() => setDeleteModal(false)} 
                                 setSuccessMessage={() => setSuccessfulDelete(true)}
-                                fetchModelData={fetchMembersData} 
+                                fetchModelData={() => fetchMembersData()} 
                             /> 
                         
                         }
@@ -168,7 +168,7 @@ const HomePage = () => {
                                 modelName={'users'}
                                 dismissRestoreModal={() => setRestoreModal(false)} 
                                 successMessage={() => setSuccessfulRestore(true)}
-                                fetchModelsData={fetchMembersData} 
+                                fetchModelData={() => fetchMembersData()} 
                             /> 
                         
                         }

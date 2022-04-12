@@ -6,13 +6,25 @@ import Card from "./UI/Card";
 import OfferingsTable from "./UI/Tables/OfferingsTable";
 import RecordOffering from "./UI/Modals/Create/RecordOffering";
 import AddRecordButton from "./UI/Button/AddRecordButton";
-
-
+import UpdateOffering from "./UI/Modals/Update/UpdateOffering";
+import DisplayUpdateSuccessMessage from "./UI/Modals/Update/SuccessMessage/DisplaySuccessMessage";
+import DeleteRecord from "./UI/Modals/Delete/DeleteRecord";
+import DeleteSuccessMessage from "./UI/Modals/Delete/DeleteSuccessMessage";
+import RestoreRecord from "./UI/Modals/Restore/RestoreRecord";
+import SuccessfulRestoreMessage from "./UI/Modals/Restore/RestoreSuccessMessage";
 
 const Offering = () => {
     const [offerings, setOfferings] = useState([]);
     const [newOffering, setNewOffering] = useState(false);
     const [filteredYear, setFilteredYear] = useState('');
+    const [offeringToReceiveAction, setOfferingToReceiveAction] = useState(null);
+    const [showOffering, setShowOffering] = useState(false);
+    const [editOffering, setEditOffering] = useState(false);
+    const [successfulUpdate, setSuccessfulUpdate] = useState(false)
+    const [deleteOffering, setDeleteOffering] = useState(false);
+    const [restoreOffering, setRestoreOffering] = useState(false);
+    const [successfulDelete, setSuccessfulDelete] = useState(false)
+    const [successfulRestore, setSuccessfulRestore] = useState(false)
 
     const recordOfferingHandler = () => {
         setNewOffering(true);
@@ -80,8 +92,61 @@ const Offering = () => {
                                 </AddRecordButton>
                             </div>
                         </div>
+                        {
+                            editOffering && 
+                            <UpdateOffering 
+                                offering={offeringToReceiveAction}
+                                dismissModal={() => setEditOffering(false)}
+                                successMessage={() => setSuccessfulUpdate(true)}   
+                                fetchOfferings={() => fetchOfferings()}
+                            />
+                        }
+                        {
+                            successfulUpdate && 
+                            <DisplayUpdateSuccessMessage
+                                title={'OFFERING'}
+                                dismissSuccessMessage={() => setSuccessfulUpdate(false)}
+                            />
+                        }
+
+                        {
+                            deleteOffering && 
+                            <DeleteRecord 
+                                modelName={'offerings'}
+                                record={offeringToReceiveAction}
+                                dismissDeleteModal={() => setDeleteOffering(false)}
+                                fetchModelData={() => fetchOfferings()}
+                                setSuccessMessage={() => setSuccessfulDelete(true)} 
+                            />
+                        }
+                        {successfulDelete && <DeleteSuccessMessage title={'OFFERING'} dismissSuccessMessage={() => setSuccessfulDelete(false)} />}
+
+                        {
+                            restoreOffering && 
+                            <RestoreRecord 
+                                record={offeringToReceiveAction}
+                                modelName={'offerings'}
+                                dismissRestoreModal={() => setRestoreOffering(false)}
+                                fetchModelData={() => fetchOfferings()}
+                                successMessage={() => setSuccessfulRestore(true)}
+                            />
+                        }
+                        {
+                            successfulRestore && 
+                            <SuccessfulRestoreMessage 
+                                title={'OFFERING'}
+                                dismissSuccessMessage={() => setSuccessfulRestore(false)}
+                            />
+                        }
                         <div className="container px-4">
-                           <OfferingsTable offerings = {filteredData} /> 
+                           <OfferingsTable 
+                                offerings = {filteredData} 
+                                actionCallback={(offering) => setOfferingToReceiveAction(offering)} 
+                                showOffering = {(() => setShowOffering(true))} 
+                                editOffering= {(() => setEditOffering(true))} 
+                                deleteOffering = {(() => setDeleteOffering(true))} 
+                                restoreOffering = {(() => setRestoreOffering(true))} 
+                           /> 
                         </div>
                     </Card>
                 </div>

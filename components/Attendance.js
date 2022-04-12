@@ -10,6 +10,8 @@ import UpdateAttendance from "./UI/Modals/Update/UpdateAttendance";
 import DisplayUpdateSuccessMessage from "./UI/Modals/Update/SuccessMessage/DisplaySuccessMessage";
 import DeleteRecord from "./UI/Modals/Delete/DeleteRecord";
 import DeleteSuccessMessage from "./UI/Modals/Delete/DeleteSuccessMessage";
+import RestoreRecord from "./UI/Modals/Restore/RestoreRecord";
+import SuccessfulRestoreMessage from "./UI/Modals/Restore/RestoreSuccessMessage";
 
 const Attendance = () => {
     const [attendances, setAttendances] = useState([]);
@@ -113,6 +115,24 @@ const Attendance = () => {
                             />
                         }
                         {successfulDelete && <DeleteSuccessMessage title={'ATTENDANCE'} dismissSuccessMessage={() => setSuccessfulDelete(false)} />}
+
+                        {
+                            restoreAttendance && 
+                            <RestoreRecord 
+                                record={attendanceToReceiveAction}
+                                modelName={'attendances'}
+                                dismissRestoreModal={() => setRestoreAttendance(false)}
+                                fetchModelData={() => fetchAllAttendance()}
+                                successMessage={() => setSuccessfulRestore(true)}
+                            />
+                        }
+                        {
+                            successfulRestore && 
+                            <SuccessfulRestoreMessage 
+                                title={'ATTENDANCE'}
+                                dismissSuccessMessage={() => setSuccessfulRestore(false)}
+                            />
+                        }
                         <div className="container px-4">
                             <AttendanceTable 
                                 allAttendances={filteredData}

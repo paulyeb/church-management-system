@@ -1,10 +1,28 @@
-import Link from "next/link";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faPen, faTrashRestoreAlt } from "@fortawesome/free-solid-svg-icons";
-const ExpenditureTable = ({ allExpenditure }) => {
-    
+import { faPen, faRefresh } from "@fortawesome/free-solid-svg-icons";
+
+const ExpenditureTable = ({ allExpenditure, showExpenditure, editExpenditure, deleteExpenditure, restoreExpenditure, actionCallback }) => {
+    const showExpenditureHandler = (expenditure) => {
+        actionCallback(expenditure);
+        !expenditure.deleted_at && showExpenditure();
+    };
+
+    const editExpenditureHandler = (expenditure) => {
+        actionCallback(expenditure);
+        !expenditure.deleted_at && editExpenditure();
+    };
+
+    const deleteExpenditureHandler = (expenditure) => {
+        actionCallback(expenditure);
+        !expenditure.deleted_at && deleteExpenditure();
+    };
+
+    const restoreAttendanceHandler = (expenditure) => {
+        actionCallback(expenditure);
+        restoreExpenditure();
+    };
+
     return (
         <table className="text-left my-6 w-full mx-auto">
             <thead>
@@ -27,28 +45,29 @@ const ExpenditureTable = ({ allExpenditure }) => {
                         <td className="border border-emerald-500 px-4 py-2 text-emerald-600">{expenditure.comments}</td>
                         <td className="px-4 py-2 text-emerald-600">
                             <div className="flex flex-row items-centre justify-start">
-                                <button 
-                                    className="p-3 hover:bg-gray-300 hover:border-2 rounded-full"
+                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
+                                    onClick={() => showExpenditureHandler(expenditure)}
                                 >
-                                    <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
+                                    <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}} />
                                 </button>
-                                <Link href={`edit/expenditure/${expenditure.id}`}> 
-                                    <a>
-                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
-                                        <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
+                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
+                                    onClick={() => editExpenditureHandler(expenditure)}
+                                >
+                                    <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
+                                </button>
+                                {
+                                    !expenditure.deleted_at ? 
+                                        <button 
+                                            className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
+                                            onClick={() => deleteExpenditureHandler(expenditure)}
+                                        >
+                                            <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
+                                        </button> :
+                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5"
+                                        onClick={() => restoreAttendanceHandler(expenditure)}>
+                                        <FontAwesomeIcon icon = {faRefresh} style={{width: '20px', color: 'black'}}/>
                                     </button>
-                                    </a>
-                                </Link> 
-                                {!expenditure.deleted_at ? <Link href={`delete/expenditure/${expenditure.id}`}>
-                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
-                                        <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
-                                    </button>
-                                </Link> :
-                                <Link href={`restore/expenditure/${expenditure.id}`}>
-                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
-                                        <FontAwesomeIcon icon = {faTrashRestoreAlt} style={{width: '20px', color: 'black'}}/>
-                                    </button>
-                                </Link>}
+                                }
                             </div>
                         </td>
                     </tr>

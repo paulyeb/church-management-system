@@ -1,4 +1,4 @@
-const RestoreRecord = ({ fetchModelsData, record, modelName, dismissRestoreModal, successMessage }) => {
+const RestoreRecord = ({ fetchModelData, record, modelName, dismissRestoreModal, successMessage }) => {
     const restoreRecordById = () => {
         fetch(`http://localhost:8000/api/v1/${modelName}/${record.id}/restore`)
             .then(response => response.json())
@@ -6,7 +6,7 @@ const RestoreRecord = ({ fetchModelsData, record, modelName, dismissRestoreModal
                 console.log(data);
                 dismissRestoreModal();
                 successMessage();
-                fetchModelsData();
+                fetchModelData();
             });
     }
     return (
@@ -16,7 +16,7 @@ const RestoreRecord = ({ fetchModelsData, record, modelName, dismissRestoreModal
                     <div className=" text-gray-600 text-xl m-2 font-medium">
                         <u>RESTORE</u>
                     </div>
-                    ARE YOU SURE YOU WANT TO RESTORE THIS RECORD: {record.name}? 
+                    ARE YOU SURE YOU WANT TO RESTORE THIS RECORD {record.name ? `: ${record.name}` : null}? 
                 </div>
                 <div>
                     <button 

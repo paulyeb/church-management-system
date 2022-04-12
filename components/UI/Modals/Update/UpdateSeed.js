@@ -1,28 +1,27 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import Backdrop from "../Backdrop";
 
-
-const EditSeed = ({ data, onUpdateSeed }) => {
+const UpdateSeed = ({ seed, dismissModal, successMessage, fetchSeeds }) => {
     const [dateInput, setDateInput] = useState('');
     const [memberInput, setMemberInput] = useState('');
     const [amountInput, setAmountInput] = useState('');
     const [commentsInput, setCommentsInput] = useState('');
 
     useEffect(() => {
-        getExistingSeedRecord(data);
-    }, [data]);
+        getExistingSeedRecord(seed);
+    }, [seed]);
 
-    const getExistingSeedRecord = (data) => {
-        if (!data) {
+    const getExistingSeedRecord = (seed) => {
+        if (!seed) {
             return;
         }
 
-        console.log(data)
+        console.log(seed)
 
-        setDateInput(data.date);
-        setMemberInput(data.user.name);
-        setAmountInput(data.amount);
-        setCommentsInput(data.comments);
+        setDateInput(seed.date);
+        setMemberInput(seed.user.name);
+        setAmountInput(seed.amount);
+        setCommentsInput(seed.comments);
     }
 
     const submitFormHandler = (e) => {
@@ -30,17 +29,32 @@ const EditSeed = ({ data, onUpdateSeed }) => {
 
         const updatedSeedRecord = {
             date: dateInput,
-            member: memberInput,
+            user_id: memberInput,
             amount: amountInput,
             comments: commentsInput,
         }
-    
-        onUpdateSeed(updatedSeedRecord);
+        
+        fetch(`http://localhost:8000/api/v1/seeds/${seed.id}`,{
+            method: "PUT",
+            mode: "cors",
+            body: JSON.stringify(updatedSeedRecord),
+            headers: {
+                "Accept": "apllication/json",
+                "Content-Type": "apllication/json"
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                dismissModal();
+                successMessage();
+                fetchSeeds();
+
+            })
     }
     
     return (
-        data ? <div className="fixed inset-0 bg-gray-500 bg-opacity-70 overflow-y-auto h-full w-full">
-            <div className="relative text-gray-500 top-10 mx-auto p-5 border 2xl:w-2/4 xl:w-3/4 lg:w-3/4 md:w-4/4 sm:w-4/4 xs:w-2/4 shadow-2xl rounded-2xl bg-white">
+        seed ? <Backdrop>
             <form onSubmit={submitFormHandler}>
                     <p className="text-center  font-light text-3xl">Update Seed Record</p>
                     <hr className=" my-3 mx-12"/>
@@ -63,7 +77,7 @@ const EditSeed = ({ data, onUpdateSeed }) => {
                                 <label>Member</label>         
                             </div>
                             <input type="text" 
-                                className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none text-gray-500"
+                                className="border-2 rounded font-light text-xl p-4 w-64 md:w-80 focus:outline-none text-gray-500"
                                 value={memberInput}
                                 onChange={e => setMemberInput(e.target.value)}
                             />
@@ -74,7 +88,7 @@ const EditSeed = ({ data, onUpdateSeed }) => {
                                 <label>Amount</label>         
                             </div>
                             <input type="number" 
-                                className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none text-gray-500" 
+                                className="border-2 rounded font-light text-xl p-4 w-64 md:w-80 focus:outline-none text-gray-500" 
                                 value={amountInput}
                                 onChange={e => setAmountInput(e.target.value)} 
                             />
@@ -86,7 +100,7 @@ const EditSeed = ({ data, onUpdateSeed }) => {
                             </div>
                             <input 
                                 type="text" 
-                                className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none text-gray-500"
+                                className="border-2 rounded font-light text-xl p-4 w-64 md:w-80 focus:outline-none text-gray-500"
                                 value={commentsInput}
                                 onChange={e => setCommentsInput(e.target.value)}
                             />
@@ -96,23 +110,25 @@ const EditSeed = ({ data, onUpdateSeed }) => {
                         </div>
 
                         <div className="flex flex-row items-centre justify-end mt-4">
-                            
-                            <Link href='/seeds'>
-                                <button className="text-white bg-pink-700 hover:bg-xl:w-96 pink-80 0 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg px-5 py-1.5 text-center dark:bg-pink-500 dark:hover:bg-pink-700 dark:focus:ring-xl:w-96 pink-80 0 mx-2" type="button" >
-                                    Cancel
-                                </button>  
-                            </Link>
-
-                            <button className="text-white bg-green-700 hover:bg-xl:w-96 green-80 0 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-5 py-1.5 text-center dark:bg-green-500 dark:hover:bg-green-700 dark:focus:ring-xl:w-96 green-80 0 mx-2" type="submit">
+                            <button 
+                                className="text-white bg-pink-700 hover:bg-xl:w-96 pink-80 0 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg px-5 py-1.5 text-center dark:bg-pink-500 dark:hover:bg-pink-700 dark:focus:ring-xl:w-96 pink-80 0 mx-2" 
+                                type="button"
+                                onClick={dismissModal} 
+                            >
+                                Cancel
+                            </button> 
+                            <button 
+                                className="text-white bg-green-700 hover:bg-xl:w-96 green-80 0 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-5 py-1.5 text-center dark:bg-green-500 dark:hover:bg-green-700 dark:focus:ring-xl:w-96 green-80 0 mx-2" 
+                                type="submit"
+                            >
                                 Save
                             </button>
                         </div>
                     </div>
                 </form>
-            </div>    
-        </div>
-        : <div>Loading member data, please wait...</div>
+            </Backdrop>
+        : <div>Loading seed data, please wait...</div>
     )
 }
 
-export default EditSeed;
+export default UpdateSeed;

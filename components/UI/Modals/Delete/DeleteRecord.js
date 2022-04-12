@@ -28,7 +28,7 @@ const DeleteRecord = ({dismissDeleteModal, record, fetchModelData, modelName, se
                         <div className=" text-gray-600 text-xl m-2">
                             <u>DELETE</u>
                         </div>
-                        ARE YOU SURE YOU WANT TO DELETE THIS RECORD {record.name ? `:${record.name}` : null}?
+                        ARE YOU SURE YOU WANT TO DELETE THIS RECORD{record.name ? `: ${record.name}` : null}?
                     </div>
                     <div>
                         <button 

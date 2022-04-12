@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Backdrop from "../Backdrop";
 
 const UpdateAttendance = ({ attendance, dismissModal, fetchAttendances, successMessage }) => {
     const [dateInput, setDateInput] = useState('');
@@ -56,8 +57,7 @@ const UpdateAttendance = ({ attendance, dismissModal, fetchAttendances, successM
     }
     
     return (
-        attendance ? <div className="fixed inset-0 bg-gray-500 bg-opacity-70 overflow-y-auto h-full w-full">
-            <div className="relative text-gray-500 top-20 mx-auto p-5 border 2xl:w-2/4 xl:w-3/4 lg:w-3/4 md:w-4/4 sm:w-4/4 xs:w-2/4 shadow-2xl rounded-2xl bg-white">
+        attendance ? <Backdrop>
             <form onSubmit={submitFormHandler}>
                     <p className="text-center  font-light text-3xl">Update Attendance Record</p>
                     <hr className=" my-3 mx-12"/>
@@ -149,8 +149,7 @@ const UpdateAttendance = ({ attendance, dismissModal, fetchAttendances, successM
                         </div>
                     </div>
                 </form>
-            </div>    
-        </div>
+            </Backdrop>
         : <div>Loading member attendance, please wait...</div>
     )
 }

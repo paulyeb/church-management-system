@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import Backdrop from "../Backdrop";
 
 
 const UpdateMemberModal = ({ member, dismissModal, setSuccess, fetchMembersData }) => {
@@ -85,8 +85,8 @@ const UpdateMemberModal = ({ member, dismissModal, setSuccess, fetchMembersData 
     }
     
     return (
-        member ? <div className="fixed inset-0 bg-gray-500 bg-opacity-70 overflow-y-auto h-full w-full">
-            <div className="relative top-20 mx-auto p-5 border 2xl:w-2/4 xl:w-3/4 lg:w-3/4 md:w-4/4 sm:w-4/4 xs:w-2/4 shadow-2xl rounded-2xl bg-white">
+        member ? <Backdrop>
+
             <form onSubmit={submitFormHandler}>
                     <p className="text-center text-gray-500 font-medium text-3xl">Update Member's Details</p>
                     <hr className=" my-3 mx-12"/>
@@ -108,10 +108,6 @@ const UpdateMemberModal = ({ member, dismissModal, setSuccess, fetchMembersData 
                                 onChange={e => setFamilyInput(e.target.value)}
                             >
                                 <option disabled selected hidden>FAMILY</option>    
-                                {/* <option className="text-gray-500" value="Hope">Hope</option>    
-                                <option className="text-gray-500" value="Love">Love</option>    
-                                <option className="text-gray-500" value="Peace">Peace</option>    
-                                <option className="text-gray-500" value="Faith">Faith</option>     */}
                                 {
                                     allFamilies.map(family => 
                                         <option 
@@ -169,7 +165,7 @@ const UpdateMemberModal = ({ member, dismissModal, setSuccess, fetchMembersData 
                                 className="border-2 rounded font-medium text-xl p-4 w-64 md:w-80  focus:outline-none text-gray-500" placeholder="PROFESSION" 
                                 value={professionInput} 
                                 onChange={e => setProfessionInput(e.target.value)}
-                            />
+                                />
                         </div>
 
                         <div className="m-2">
@@ -247,8 +243,7 @@ const UpdateMemberModal = ({ member, dismissModal, setSuccess, fetchMembersData 
                         </div>
                     </div>
                 </form>
-            </div>    
-        </div>
+            </Backdrop>
         : <div>Loading member data, please wait...</div>
     )
 }

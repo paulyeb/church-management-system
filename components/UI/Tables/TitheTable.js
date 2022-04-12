@@ -1,10 +1,27 @@
-import Link from "next/link";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faPen, faTrashRestoreAlt } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faRefresh } from "@fortawesome/free-solid-svg-icons";
 
-const TitheTable = ({ allTithe }) => {
+const TitheTable = ({ allTithe, showTithe, editTithe, deleteTithe, restoreTithe, actionCallback }) => {
+    const showTitheHandler = (tithe) => {
+        actionCallback(tithe);
+        !tithe.deleted_at && showTithe();
+    };
+
+    const editTitheHandler = (tithe) => {
+        actionCallback(tithe);
+        !tithe.deleted_at && editTithe();
+    };
+
+    const deleteTitheHandler = (tithe) => {
+        actionCallback(tithe);
+        !tithe.deleted_at && deleteTithe();
+    };
+
+    const restoreTitheHandler = (tithe) => {
+        actionCallback(tithe);
+        restoreTithe();
+    };
 
     console.log('all tithe, ', allTithe)
     if (!allTithe.length) {
@@ -33,28 +50,29 @@ const TitheTable = ({ allTithe }) => {
                         <td className="border border-emerald-500 px-4 py-2 text-emerald-600">{tithe.comments}</td>
                         <td className="px-4 py-2 text-emerald-600">
                             <div className="flex flex-row items-centre justify-start">
-                                <button 
-                                    className="p-3 hover:bg-gray-300 hover:border-2 rounded-full"
+                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
+                                    onClick={() => showTitheHandler(tithe)}
                                 >
-                                    <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
+                                    <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}} />
                                 </button>
-                                <Link href={`edit/tithe/${tithe.id}`}> 
-                                    <a>
-                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
-                                        <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
+                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
+                                    onClick={() => editTitheHandler(tithe)}
+                                >
+                                    <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
+                                </button>
+                                {
+                                    !tithe.deleted_at ? 
+                                        <button 
+                                            className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
+                                            onClick={() => deleteTitheHandler(tithe)}
+                                        >
+                                            <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
+                                        </button> :
+                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5"
+                                        onClick={() => restoreTitheHandler(tithe)}>
+                                        <FontAwesomeIcon icon = {faRefresh} style={{width: '20px', color: 'black'}}/>
                                     </button>
-                                    </a>
-                                </Link> 
-                                {!tithe.deleted_at ? <Link href={`delete/tithe/${tithe.id}`}>
-                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
-                                        <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
-                                    </button>
-                                </Link> :
-                                <Link href={`restore/tithe/${tithe.id}`}>
-                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
-                                        <FontAwesomeIcon icon = {faTrashRestoreAlt} style={{width: '20px', color: 'black'}}/>
-                                    </button>
-                                </Link>}
+                                }
                             </div>
                         </td>
                     </tr>
