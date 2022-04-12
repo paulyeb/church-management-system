@@ -1,13 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faPen, faRefresh } from "@fortawesome/free-solid-svg-icons";
 
-const OfferingsTable = ({ offerings, showOffering, editOffering, deleteOffering, restoreOffering, actionCallback }) => {
-    const showOfferingHandler = (offering) => {
-        actionCallback(offering);
-        !offering.deleted_at && showOffering();
-    };
-
+const OfferingsTable = ({ offerings, editOffering, deleteOffering, restoreOffering, actionCallback }) => {
     const editOfferingHandler = (offering) => {
         actionCallback(offering);
         !offering.deleted_at && editOffering();
@@ -44,12 +39,7 @@ const OfferingsTable = ({ offerings, showOffering, editOffering, deleteOffering,
                         <td className="border border-emerald-500 px-4 py-2 text-emerald-600">{offering.comments}</td>
                         <td className="px-4 py-2 text-emerald-600">
                             <div className="flex flex-row items-centre justify-start">
-                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
-                                    onClick={() => showOfferingHandler(offering)}
-                                >
-                                    <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}} />
-                                </button>
-                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
+                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full" 
                                     onClick={() => editOfferingHandler(offering)}
                                 >
                                     <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />

@@ -1,13 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faPen, faRefresh } from "@fortawesome/free-solid-svg-icons";
 
-const TitheTable = ({ allTithe, showTithe, editTithe, deleteTithe, restoreTithe, actionCallback }) => {
-    const showTitheHandler = (tithe) => {
-        actionCallback(tithe);
-        !tithe.deleted_at && showTithe();
-    };
-
+const TitheTable = ({ allTithe, editTithe, deleteTithe, restoreTithe, actionCallback }) => {
     const editTitheHandler = (tithe) => {
         actionCallback(tithe);
         !tithe.deleted_at && editTithe();
@@ -50,12 +45,7 @@ const TitheTable = ({ allTithe, showTithe, editTithe, deleteTithe, restoreTithe,
                         <td className="border border-emerald-500 px-4 py-2 text-emerald-600">{tithe.comments}</td>
                         <td className="px-4 py-2 text-emerald-600">
                             <div className="flex flex-row items-centre justify-start">
-                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
-                                    onClick={() => showTitheHandler(tithe)}
-                                >
-                                    <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}} />
-                                </button>
-                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
+                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full" 
                                     onClick={() => editTitheHandler(tithe)}
                                 >
                                     <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />

@@ -1,13 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faPen, faRefresh } from "@fortawesome/free-solid-svg-icons";
 
-const ExpenditureTable = ({ allExpenditure, showExpenditure, editExpenditure, deleteExpenditure, restoreExpenditure, actionCallback }) => {
-    const showExpenditureHandler = (expenditure) => {
-        actionCallback(expenditure);
-        !expenditure.deleted_at && showExpenditure();
-    };
-
+const ExpenditureTable = ({ allExpenditure, editExpenditure, deleteExpenditure, restoreExpenditure, actionCallback }) => { 
     const editExpenditureHandler = (expenditure) => {
         actionCallback(expenditure);
         !expenditure.deleted_at && editExpenditure();
@@ -45,12 +40,7 @@ const ExpenditureTable = ({ allExpenditure, showExpenditure, editExpenditure, de
                         <td className="border border-emerald-500 px-4 py-2 text-emerald-600">{expenditure.comments}</td>
                         <td className="px-4 py-2 text-emerald-600">
                             <div className="flex flex-row items-centre justify-start">
-                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
-                                    onClick={() => showExpenditureHandler(expenditure)}
-                                >
-                                    <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}} />
-                                </button>
-                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
+                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full" 
                                     onClick={() => editExpenditureHandler(expenditure)}
                                 >
                                     <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />

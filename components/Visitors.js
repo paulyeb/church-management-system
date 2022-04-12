@@ -61,7 +61,7 @@ const Visitors = () => {
     }
 
     const filteredNameHandler = (e) => {
-        setFilteredName(e.target.value);
+        setFilteredName(e.target.value.toLowerCase());
     }
 
     const filteredDateHandler = (e) => {
@@ -70,7 +70,7 @@ const Visitors = () => {
 
     const filteredData = filteredName ? 
         allVisitors.filter( visitor => {
-            return visitor.name.includes(filteredName);
+            return visitor.name.toLowerCase().includes(filteredName);
             }
         ) : 
         filteredDate ? allVisitors.filter( visitor => {
