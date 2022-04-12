@@ -1,10 +1,26 @@
-import Link from 'next/link';
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faPen, faTrashRestoreAlt } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faRefresh } from "@fortawesome/free-solid-svg-icons";
 
-const MembersTable = ({memberDetails}) => {
+const MembersTable = ({memberDetails, showMember, editMember, deleteMember, restoreMember, actionCallback}) => {
+
+    const showMemberHandler = (member) => {
+        actionCallback(member);
+        !member.deleted_at && showMember();
+    };
+    const editMemberHandler = (member) => {
+        actionCallback(member);
+        !member.deleted_at && editMember();
+    };
+
+    const deleteMemberHandler = (member) => {
+        actionCallback(member);
+        !member.deleted_at && deleteMember();
+    };
+    const restoreMemberHandler = (member) => {
+        actionCallback(member);
+        restoreMember();
+    };
 
     return ( 
         <>
@@ -18,42 +34,42 @@ const MembersTable = ({memberDetails}) => {
                 </tr>
             </thead>
             <tbody>
-                { memberDetails.map( member => 
+                { 
+                    memberDetails.map( member => 
                         <tr className="hover:bg-gray-100 border border-emerald-500" key = {member.id}>          
                             <td className="px-4 py-2 text-emerald-600">{member.name}</td>
                             <td className="px-4 py-2 text-emerald-600">{member.phone_number}</td>
                             <td className="px-4 py-2 text-emerald-600">{member.family?.name}</td>
                             <td className="px-4 py-2 text-emerald-600">
                                 <div className="flex flex-row items-centre justify-start">
-                                    <Link href={`show/member/${member.id}`}>
-                                        <a>
-                                            <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full">
-                                                <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
-                                            </button>
-                                        </a>
-                                    </Link>
-                                    <Link href={`edit/member/${member.id}`}> 
-                                        <a>
-                                        <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
-                                            <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
+                                    <button 
+                                        className="p-3 hover:bg-gray-300 hover:border-2 rounded-full"
+                                        onClick={() => showMemberHandler(member)}>
+                                        <FontAwesomeIcon icon = {faEye} style={{width: '20px', color: 'black'}}/>
+                                    </button>
+                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
+                                        onClick={() => editMemberHandler(member)}
+                                    >
+                                        <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
+                                    </button>
+                                    {
+                                        !member.deleted_at ? 
+                                            <button 
+                                                className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
+                                                onClick={() => deleteMemberHandler(member)}
+                                            >
+                                                <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
+                                            </button> :
+                                        <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5"
+                                            onClick={() => restoreMemberHandler(member)}>
+                                            <FontAwesomeIcon icon = {faRefresh} style={{width: '20px', color: 'black'}}/>
                                         </button>
-                                        </a>
-                                    </Link> 
-                                    {!member.deleted_at ? <Link href={`delete/member/${member.id}`}>
-                                        <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
-                                            <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
-                                        </button>
-                                    </Link> :
-                                     <Link href={`restore/member/${member.id}`}>
-                                        <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
-                                            <FontAwesomeIcon icon = {faTrashRestoreAlt} style={{width: '20px', color: 'black'}}/>
-                                        </button>
-                                    </Link>}
+                                    }
                                 </div>
                             </td>
                         </tr>     
-                        )
-                    }
+                    )
+                }
                 <tr className="border border-emerald-500">
                     <td className="px-4 py-7 text-emerald-600"></td>
                 </tr>

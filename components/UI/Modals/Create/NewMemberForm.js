@@ -104,8 +104,8 @@ const NewMemberForm = (props) => {
                         <div className="m-2">
                             <select className="border-2 rounded font-light text-xl p-4 w-64 md:w-80  focus:outline-none w-5/5 text-gray-500" ref={genderInputRef} required >
                                     <option disabled selected hidden>GENDER</option>    
-                                    <option className="text-gray-500" value="male">Male</option>    
-                                    <option className="text-gray-500" value="female">Female</option>  
+                                    <option className="text-gray-500" value="Male">Male</option>    
+                                    <option className="text-gray-500" value="Female">Female</option>  
                             </select>  
                         </div>
 

@@ -6,6 +6,11 @@ import { faPen, faTrashRestoreAlt } from "@fortawesome/free-solid-svg-icons";
 
 const TitheTable = ({ allTithe }) => {
 
+    console.log('all tithe, ', allTithe)
+    if (!allTithe.length) {
+        return <p>Loading...</p>
+    }
+
     return (
         <table className="text-left my-6 w-full mx-auto">
             <thead>
@@ -19,7 +24,7 @@ const TitheTable = ({ allTithe }) => {
                 </tr>
             </thead>
             <tbody>
-                {allTithe.map( tithe => 
+                {allTithe.filter(tithe => tithe.user).map( tithe => 
                     <tr className="hover:bg-gray-100 border border-emerald-500" key={tithe.id}>
                         <td className="border-emerald-500 px-3 text-emerald-600 w-9"><input type="checkbox" /></td>
                         <td className="border border-emerald-500 px-4 py-2 text-emerald-600">{tithe.date}</td>

@@ -1,10 +1,21 @@
-import Link from "next/link";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faPen, faTrashRestoreAlt } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faRefresh } from "@fortawesome/free-solid-svg-icons";
 
-const AttendanceTable = ({ allAttendances }) => {
+const AttendanceTable = ({ allAttendances, editAttendance, deleteAttendance, restoreAttendance, actionCallback }) => {
+    const editAttendanceHandler = (attendance) => {
+        actionCallback(attendance);
+        !attendance.deleted_at && editAttendance();
+    };
+
+    const deleteAttendanceHandler = (attendance) => {
+        actionCallback(attendance);
+        !attendance.deleted_at && deleteAttendance();
+    };
+    const restoreAttendanceHandler = (attendance) => {
+        actionCallback(attendance);
+        restoreAttendance();
+    };
 
     return (
         <table className="text-left my-6 w-full mx-auto shadow-sm">
@@ -32,23 +43,24 @@ const AttendanceTable = ({ allAttendances }) => {
                         <td className="border border-emerald-500 px-4 py-2 text-emerald-600">{attendance.comments}</td>
                         <td className="px-4 py-2 text-emerald-600">
                             <div className="flex flex-row items-centre justify-start">
-                                <Link href={`edit/attendance/${attendance.id}`}> 
-                                    <a>
-                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full">
-                                        <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
+                                <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
+                                    onClick={() => editAttendanceHandler(attendance)}
+                                >
+                                    <FontAwesomeIcon icon = {faPen} style={{width: '20px', color: 'black'}} />
+                                </button>
+                                {
+                                    !attendance.deleted_at ? 
+                                        <button 
+                                            className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5" 
+                                            onClick={() => deleteAttendanceHandler(attendance)}
+                                        >
+                                            <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
+                                        </button> :
+                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5"
+                                        onClick={() => restoreAttendanceHandler(attendance)}>
+                                        <FontAwesomeIcon icon = {faRefresh} style={{width: '20px', color: 'black'}}/>
                                     </button>
-                                    </a>
-                                </Link> 
-                                {!attendance.deleted_at ? <Link href={`delete/attendance/${attendance.id}`}>
-                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
-                                        <FontAwesomeIcon icon = {faTrashCan} style={{width: '20px', color: 'black'}}/>
-                                    </button>
-                                </Link> :
-                                <Link href={`restore/attendance/${attendance.id}`}>
-                                    <button className="p-3 hover:bg-gray-300 hover:border-2 rounded-full ml-5">
-                                        <FontAwesomeIcon icon = {faTrashRestoreAlt} style={{width: '20px', color: 'black'}}/>
-                                    </button>
-                                </Link>}
+                                }
                             </div>
                         </td>
                     </tr>

@@ -1,7 +1,7 @@
 import MetaData from "../../../components/MetaData"
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import ShowMemberDetails from "../../../components/UI/Modals/Read/ShowMember";
+import ShowMemberDetails from "../../../components/UI/Modals/Read/ShowMemberModal";
 
 const ShowMemberPage = () => {
     const [member, setMember] = useState(null);

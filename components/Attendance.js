@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Header from "./UI/Header";
 import Sidebar from "./UI/Sidebar";
 import Card from "./UI/Card";
@@ -5,12 +6,23 @@ import AttendanceTable from "./UI/Tables/AttendanceTable";
 import AddRecordButton from "./UI/Button/AddRecordButton";
 import RecordAttendanceForm from "./UI/Modals/Create/RecordAttendance";
 
-import { useState, useEffect } from "react";
+import UpdateAttendance from "./UI/Modals/Update/UpdateAttendance";
+import DisplayUpdateSuccessMessage from "./UI/Modals/Update/SuccessMessage/DisplaySuccessMessage";
+import DeleteRecord from "./UI/Modals/Delete/DeleteRecord";
+import DeleteSuccessMessage from "./UI/Modals/Delete/DeleteSuccessMessage";
 
 const Attendance = () => {
     const [attendances, setAttendances] = useState([]);
     const [newAttendance, setNewAttendance] = useState(false);
     const [filteredYear, setFilteredYear] = useState('');
+    const [attendanceToReceiveAction, setAttendanceToReceiveAction] = useState(null);
+    const [showAttendance, setShowAttendance] = useState(false);
+    const [editAttendance, setEditAttendance] = useState(false);
+    const [successfulUpdate, setSuccessfulUpdate] = useState(false)
+    const [deleteAttendance, setDeleteAttendance] = useState(false);
+    const [restoreAttendance, setRestoreAttendance] = useState(false);
+    const [successfulDelete, setSuccessfulDelete] = useState(false)
+    const [successfulRestore, setSuccessfulRestore] = useState(false)
     
     const recordAttendanceHandler = () => {
         setNewAttendance(true);
@@ -33,6 +45,7 @@ const Attendance = () => {
             .then(res => res.json())
             .then(data => {console.log(data), fetchAllAttendance()})
     }
+
     const fetchAllAttendance = () => {
         fetch("http://localhost:8000/api/v1/attendances/")
         .then(res => res.json())
@@ -47,8 +60,6 @@ const Attendance = () => {
     const filteredData = attendances.filter( attendance => {
         return attendance.date.includes(filteredYear);
     })
-
-    
 
     return (
         <>
@@ -74,8 +85,43 @@ const Attendance = () => {
                                 </AddRecordButton>
                             </div>
                         </div>
+                        {
+                            editAttendance && 
+                            <UpdateAttendance 
+                                attendance={attendanceToReceiveAction}
+                                dismissModal={() => setEditAttendance(false)}
+                                successMessage={() => setSuccessfulUpdate(true)}   
+                                fetchAttendances={() => fetchAllAttendance()}
+                            />
+                        }
+                        {
+                            successfulUpdate && 
+                            <DisplayUpdateSuccessMessage
+                                title={'ATTENDANCE'}
+                                dismissSuccessMessage={() => setSuccessfulUpdate(false)}
+                            />
+                        }
+
+                        {
+                            deleteAttendance && 
+                            <DeleteRecord 
+                                modelName={'attendances'}
+                                record={attendanceToReceiveAction}
+                                dismissDeleteModal={() => setDeleteAttendance(false)}
+                                fetchModelData={() => fetchAllAttendance()}
+                                setSuccessMessage={() => setSuccessfulDelete(true)} 
+                            />
+                        }
+                        {successfulDelete && <DeleteSuccessMessage title={'ATTENDANCE'} dismissSuccessMessage={() => setSuccessfulDelete(false)} />}
                         <div className="container px-4">
-                            <AttendanceTable allAttendances={filteredData} />
+                            <AttendanceTable 
+                                allAttendances={filteredData}
+                                actionCallback={(attendance) => setAttendanceToReceiveAction(attendance)} 
+                                showAttendance = {(() => setShowAttendance(true))} 
+                                editAttendance = {(() => setEditAttendance(true))} 
+                                deleteAttendance = {(() => setDeleteAttendance(true))} 
+                                restoreAttendance = {(() => setRestoreAttendance(true))} 
+                            />
                         </div>
                     </Card>
                 </div>
