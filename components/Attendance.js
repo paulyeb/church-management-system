@@ -35,7 +35,7 @@ const Attendance = () => {
     }, []);
     
     const saveAttendanceHandler = (attendanceRecord) => {
-        fetch("http://localhost:8000/api/v1/attendances/", {
+        fetch("https://faithhouse-backend.herokuapp.com/api/v1/attendances/", {
             method: "POST",
             mode: "cors",
             body: JSON.stringify(attendanceRecord),
@@ -49,7 +49,7 @@ const Attendance = () => {
     }
 
     const fetchAllAttendance = () => {
-        fetch("http://localhost:8000/api/v1/attendances/")
+        fetch("https://faithhouse-backend.herokuapp.com/api/v1/attendances/")
         .then(res => res.json())
         .then(data => setAttendances(data));
     }

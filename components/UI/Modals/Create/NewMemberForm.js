@@ -4,7 +4,7 @@ const NewMemberForm = (props) => {
     const [allFamilies, setFamilies] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/v1/families')
+        fetch('https://faithhouse-backend.herokuapp.com/api/v1/families')
         .then(res => res.json())
         .then(data => setFamilies(data))
     }, [])

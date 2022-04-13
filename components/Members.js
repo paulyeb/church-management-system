@@ -38,7 +38,7 @@ const HomePage = () => {
 
     const newMemberHandler = (members) => {
         // console.log(members);
-        fetch("http://localhost:8000/api/v1/users/", {
+        fetch("https://faithhouse-backend.herokuapp.com/api/v1/users/", {
             method: "POST",
             mode: 'cors',
             body: JSON.stringify(members),
@@ -55,7 +55,7 @@ const HomePage = () => {
     }
     
     const fetchMembersData = () => {
-        fetch('http://localhost:8000/api/v1/users')
+        fetch('https://faithhouse-backend.herokuapp.com/api/v1/users')
             .then(res => res.json())
             .then(data => {
                 setAllMembers(data);
