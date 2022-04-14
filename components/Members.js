@@ -56,7 +56,11 @@ const HomePage = () => {
     }
     
     const fetchMembersData = () => {
-        fetch('https://faithhouse-backend.herokuapp.com/api/v1/users')
+        fetch('https://faithhouse-backend.herokuapp.com/api/v1/users',{
+            headers: {
+                mode: 'no-cors'
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 setAllMembers(data);
