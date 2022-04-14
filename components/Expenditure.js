@@ -48,13 +48,15 @@ const Expenditure = () => {
             .then(data => {
                 console.log(data),
                 fetchExpenditureList();
-            });
+            })
+            .catch((err) => console.log(err));
     }
     
     const fetchExpenditureList = () => {
         fetch("http://localhost:8000/api/v1/expenditure")
             .then(res => res.json())
-            .then(data => setExpenditure(data));
+            .then(data => setExpenditure(data))
+            .catch((err) => console.log(err));
     }
     
     const filterYearHandler = (e) => {

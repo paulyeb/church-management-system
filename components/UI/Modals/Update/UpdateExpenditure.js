@@ -51,6 +51,7 @@ const UpdateExpenditure = ({ expenditure, dismissModal, successMessage, fetchExp
                 fetchExpenditure();
 
             })
+            .catch((err) => console.log(err));
     }
     
     return (

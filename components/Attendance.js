@@ -35,7 +35,7 @@ const Attendance = () => {
     }, []);
     
     const saveAttendanceHandler = (attendanceRecord) => {
-        fetch("https://faithhouse-backend.herokuapp.com/api/v1/attendances/", {
+        fetch("http://localhost:8000/api/v1/attendances/", {
             method: "POST",
             mode: "cors",
             body: JSON.stringify(attendanceRecord),
@@ -45,13 +45,18 @@ const Attendance = () => {
             }
         })
             .then(res => res.json())
-            .then(data => {console.log(data), fetchAllAttendance()})
+            .then(data => {
+                console.log(data), 
+                fetchAllAttendance();
+            })
+            .catch((err) => console.log(err));
     }
 
     const fetchAllAttendance = () => {
-        fetch("https://faithhouse-backend.herokuapp.com/api/v1/attendances/")
+        fetch("http://localhost:8000/api/v1/attendances/")
         .then(res => res.json())
-        .then(data => setAttendances(data));
+        .then(data => setAttendances(data))
+        .catch((err) => console.log(err));
     }
     
     const filterYearHandler = (e) => {

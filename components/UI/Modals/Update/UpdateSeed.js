@@ -51,6 +51,7 @@ const UpdateSeed = ({ seed, dismissModal, successMessage, fetchSeeds }) => {
                 fetchSeeds();
 
             })
+            .catch((err) => console.log(err));
     }
     
     return (

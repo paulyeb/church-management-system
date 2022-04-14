@@ -15,7 +15,8 @@ const DeleteRecord = ({dismissDeleteModal, record, fetchModelData, modelName, se
                 fetchModelData();
                 dismissDeleteModal();
                 setSuccessMessage();
-            });
+            })
+            .catch((err) => console.log(err));
 
             
     }

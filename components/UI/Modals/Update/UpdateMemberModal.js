@@ -45,6 +45,7 @@ const UpdateMemberModal = ({ member, dismissModal, setSuccess, fetchMembersData 
         fetch('http://localhost:8000/api/v1/families')
             .then(res => res.json())
             .then(data => setFamilies(data))
+            .catch((err) => console.log(err));
     };
 
     const submitFormHandler = (e) => {
@@ -81,14 +82,14 @@ const UpdateMemberModal = ({ member, dismissModal, setSuccess, fetchMembersData 
             dismissModal();
             setSuccess(true);
         })
-        .catch(error => console.log('error: ', error))
+        .catch((err) => console.log(err))
     }
     
     return (
         member ? <Backdrop>
 
             <form onSubmit={submitFormHandler}>
-                    <p className="text-center text-gray-500 font-medium text-3xl">Update Member's Details</p>
+                    <p className="text-center text-gray-500 font-medium text-3xl">Update Members Details</p>
                     <hr className=" my-3 mx-12"/>
                     <div className="grid grid-cols-2 g-4 text-xl p-4 justify-items-center">
                         <div className="m-2">           

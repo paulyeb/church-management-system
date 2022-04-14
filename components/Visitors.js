@@ -52,12 +52,14 @@ const Visitors = () => {
                 console.log(data),
                 fetchVisitors();
             })
+            .catch((err) => console.log(err))
     }
 
     const fetchVisitors = () => {
         fetch("http://localhost:8000/api/v1/visitors")
             .then(res => res.json())
             .then(data => setAllVisitors(data))
+            .catch((err) => console.log(err))
     }
 
     const filteredNameHandler = (e) => {

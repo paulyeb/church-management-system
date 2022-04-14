@@ -38,7 +38,7 @@ const HomePage = () => {
 
     const newMemberHandler = (members) => {
         // console.log(members);
-        fetch("https://faithhouse-backend.herokuapp.com/api/v1/users/", {
+        fetch("http://localhost:8000/api/v1/users/", {
             method: "POST",
             mode: 'cors',
             body: JSON.stringify(members),
@@ -51,17 +51,19 @@ const HomePage = () => {
         .then(data => {
             console.log(data);
             fetchMembersData();
-        });    
+        })
+        .catch((err) => console.log(err));    
     }
     
     const fetchMembersData = () => {
-        fetch('https://faithhouse-backend.herokuapp.com/api/v1/users')
+        fetch('http://localhost:8000/api/v1/users')
             .then(res => res.json())
             .then(data => {
                 setAllMembers(data);
                 setFilteredMembers(data);
                 console.log(data);
-            });
+            })
+            .catch((err) => console.log(err));
         
         // console.log(allMembers);
     };

@@ -52,6 +52,7 @@ const UpdateTithe = ({ tithe, dismissModal, successMessage, fetchTithes }) => {
                 fetchTithes();
 
             })
+            .catch((err) => console.log(err));
     }
     
     return (

@@ -54,6 +54,7 @@ const UpdateAttendance = ({ attendance, dismissModal, fetchAttendances, successM
                 successMessage();
                 fetchAttendances();
             })
+            .catch((err) => console.log(err));
     }
     
     return (

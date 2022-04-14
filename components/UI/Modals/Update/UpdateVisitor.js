@@ -54,6 +54,7 @@ const UpdateVisitor = ({ visitor, dismissModal, successMessage, fetchVisitors })
                 successMessage();
                 fetchVisitors();
             })
+            .catch((err) => console.log(err));
     }
     
     return (

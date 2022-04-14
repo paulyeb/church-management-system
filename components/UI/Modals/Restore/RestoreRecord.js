@@ -7,7 +7,8 @@ const RestoreRecord = ({ fetchModelData, record, modelName, dismissRestoreModal,
                 dismissRestoreModal();
                 successMessage();
                 fetchModelData();
-            });
+            })
+            .catch((err) => console.log(err));
     }
     return (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-20 overflow-y-auto h-full w-full">

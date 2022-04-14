@@ -11,7 +11,8 @@ const RecordTithe = ({ close, onAddTithe}) => {
     useEffect(() => {
         fetch("http://localhost:8000/api/v1/users/")
             .then(res => res.json())
-            .then(data => setMembers(data));
+            .then(data => setMembers(data))
+            .catch((err) => console.log(err));
     }, [])
 
     const submitFormHandler = (e) => {

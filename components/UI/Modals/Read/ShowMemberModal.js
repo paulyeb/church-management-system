@@ -33,14 +33,15 @@ const ShowMemberModal = ({ member, dismissModal }) => {
             setMaritalStatusInput(data.marital_status);
             setResidenceInput(data.residence);
             setMinistryInput(data.ministry);
-        });
+        })
+        .catch((err) => console.log(err));
     }
     
     return (
         member ? <div className="fixed inset-0 bg-gray-500 bg-opacity-70 overflow-y-auto h-full w-full">
             <div className="relative top-20 mx-auto p-5 border 2xl:w-2/4 xl:w-3/4 lg:w-3/4 md:w-4/4 sm:w-4/4 xs:w-2/4 shadow-2xl rounded-2xl bg-white">
                 <form disabled>
-                    <p className="text-center font-medium text-3xl">Member's Details</p>
+                    <p className="text-center font-medium text-3xl">Members Details</p>
                     <hr className=" my-3 mx-12"/>
                     <div className="grid grid-cols-2 g-4 text-xl p-4  font-medium justify-items-start">
                         <div className="m-2 p-2">           
@@ -95,7 +96,7 @@ const ShowMemberModal = ({ member, dismissModal }) => {
                 </form>
             </div>    
         </div>
-        : <div>Loading member's details, please wait...</div>
+        : <div>Loading member details, please wait...</div>
     )
 }
 

@@ -50,12 +50,14 @@ const Tithe = () => {
                 console.log(data), 
                 fetchTithes();
             })
+            .catch((err) => console.log(err))
     }
 
     const fetchTithes = () => {
         fetch("http://localhost:8000/api/v1/tithes")
             .then(res => res.json())
-            .then(data => setAllTithe(data));
+            .then(data => setAllTithe(data))
+            .catch((err) => console.log(err));
     }
     
     const filterMemberHandler = (e) => {

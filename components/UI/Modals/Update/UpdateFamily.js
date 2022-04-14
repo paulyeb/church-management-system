@@ -39,6 +39,7 @@ const UpdateFamilyModal = ({ family, dismissModal, successMessage, fetchFamilies
                 dismissModal(), 
                 successMessage() 
             })
+            .catch((err) => console.log(err));
 
     }
     

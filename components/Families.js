@@ -49,13 +49,15 @@ const Families = () => {
         .then(data => {
             console.log(data);
             fetchFamiliesData();
-        });    
+        })
+        .catch((err) => console.log(err));    
     }
     
     const fetchFamiliesData = () => {
         fetch('http://localhost:8000/api/v1/families')
         .then(res => res.json())
-        .then(data => setAllFamilies(data));
+        .then(data => setAllFamilies(data))
+        .catch((err) => console.log(err));
     };
 
     const filteredFamilyHandler = (e) => {

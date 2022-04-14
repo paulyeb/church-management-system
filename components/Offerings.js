@@ -48,13 +48,15 @@ const Offering = () => {
             .then(data => {
                 console.log(data),
                 fetchOfferings();
-            });
+            })
+            .catch((err) => console.log(err));
     }
     
     const fetchOfferings = () => {
         fetch("http://localhost:8000/api/v1/offerings")
             .then(res => res.json())
-            .then(data => setOfferings(data));
+            .then(data => setOfferings(data))
+            .catch((err) => console.log(err));
     }
 
     

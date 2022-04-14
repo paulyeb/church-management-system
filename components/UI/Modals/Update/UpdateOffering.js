@@ -51,6 +51,7 @@ const UpdateOffering = ({ offering, dismissModal, successMessage, fetchOfferings
                 fetchOfferings();
 
             })
+            .catch((err) => console.log(err));
     }
     
     return (

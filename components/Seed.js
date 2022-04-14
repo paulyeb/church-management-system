@@ -50,12 +50,14 @@ const Seed = () => {
                 console.log(data), 
                 fetchSeeds();
             })
+            .catch((err) => console.log(err))
     }
 
     const fetchSeeds = () => {
         fetch("http://localhost:8000/api/v1/seeds/")
             .then(res => res.json())
-            .then(data => setSeed(data));
+            .then(data => setSeed(data))
+            .catch((err) => console.log(err));
     }
 
     const filterMemberHandler = (e) => {
