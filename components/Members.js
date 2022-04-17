@@ -214,7 +214,7 @@ const HomePage = () => {
                                     onChange={filterByNameHandler}
                                 />
                                 <AddRecordButton onClick = {newMemberFormHandler}>
-                                    NEW MEMBER
+                                    NEW MEMBERs
                                 </AddRecordButton>
                             </div>
                         </div>
