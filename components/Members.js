@@ -213,9 +213,9 @@ const HomePage = () => {
                                     placeholder="Search by Name"
                                     onChange={filterByNameHandler}
                                 />
-                                <AddRecordButton onClick = {newMemberFormHandler}>
+                                {/* <AddRecordButton onClick = {newMemberFormHandler}>
                                     NEW MEMBERs
-                                </AddRecordButton>
+                                </AddRecordButton> */}
                             </div>
                         </div>
                         <div className="container px-4">
