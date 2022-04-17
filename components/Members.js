@@ -112,9 +112,9 @@ const HomePage = () => {
     }
 
     return (
-        <div className="conatiner">
+        <>
             <Header />
-            <div className="flex flex-row items-centre justify-start w-screen h-screen bg-gray-100 leading-10">
+            <div className="container flex flex-row items-centre justify-start w-screen h-screen bg-gray-100 leading-10">
                 <Sidebar />
                 <div className="m-2 p-5 h-screen w-full">
                     <Card>
@@ -231,7 +231,7 @@ const HomePage = () => {
                     </Card>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
