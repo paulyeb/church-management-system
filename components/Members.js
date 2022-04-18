@@ -56,7 +56,7 @@ const HomePage = () => {
     }
     
     const fetchMembersData = () => {
-        fetch('https://faithhouse-backend.herokuapp.com/api/v1/users')
+        fetch('http://localhost:8000/api/v1/users')
             .then(res => res.json())
             .then(data => {
                 setAllMembers(data);
@@ -112,9 +112,9 @@ const HomePage = () => {
     }
 
     return (
-        <>
+        <div className="container">
             <Header />
-            <div className="container flex flex-row items-centre justify-start w-screen h-screen bg-gray-100 leading-10">
+            <div className="flex flex-row items-centre justify-start overflow-x-scroll w-screen h-screen bg-gray-100 leading-10">
                 <Sidebar />
                 <div className="m-2 p-5 h-screen w-full">
                     <Card>
@@ -182,7 +182,7 @@ const HomePage = () => {
                         }
 
                         
-                        <div className="flex flex-row items-centre justify-between p-4">
+                        <div className="md:flex flex-row items-centre justify-center justify-between p-4">
                             <div className="font-bold">
                                 Members
                             </div>
@@ -213,9 +213,9 @@ const HomePage = () => {
                                     placeholder="Search by Name"
                                     onChange={filterByNameHandler}
                                 />
-                                {/* <AddRecordButton onClick = {newMemberFormHandler}>
-                                    NEW MEMBERs
-                                </AddRecordButton> */}
+                                <AddRecordButton onClick = {newMemberFormHandler}>
+                                    NEW MEMBER
+                                </AddRecordButton>
                             </div>
                         </div>
                         <div className="container px-4">
@@ -231,7 +231,7 @@ const HomePage = () => {
                     </Card>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

@@ -76,11 +76,11 @@ const Families = () => {
                 <div className="m-2 p-5 h-screen w-full">
                     <Card>
                         { newFamily && <NewFamilyForm onSaveNewFamily={saveNewMemberHandler} close = {() => setNewFamily(false)} /> }
-                        <div className="flex flex-row items-centre justify-between p-4">
-                            <div className="font-bold">
+                        <div className="md:flex flex-row items-centre justify-center justify-between p-4">
+                            <div className="font-bold ml-2">
                             Families
                             </div>
-                            <div className="mx-4">
+                            <div className="mr-4">
                                 <input 
                                     type="search" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 

@@ -89,11 +89,11 @@ const Visitors = () => {
                 <div className="m-2 p-5 h-screen w-full">
                     <Card>
                     {newVisitor && <NewVisitorForm onAddVisitor={saveVisitorHandler} close = {() => setNewVisitor(false)} />}
-                        <div className="flex flex-row items-centre justify-between p-4">
-                            <div className="font-bold">
+                    <div className="lg:flex flex-row items-centre justify-center justify-between p-4">
+                            <div className="font-bold ml-4">
                             Visitors
                             </div>
-                            <div className="mx-4">
+                            <div className="mx-2">
                                 <input 
                                     type="text" 
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
@@ -105,11 +105,11 @@ const Visitors = () => {
                                     className="border-2 rounded p-1 mx-2 focus:outline-none" 
                                     placeholder="Search by date" 
                                     onChange={filteredDateHandler}
-                                />
-                                <AddRecordButton onClick={newVisitorHandler}>
+                                    />
+                                    </div>
+                                <div className="ml-4 lg:ml-0 lg:my-0 my-2"><AddRecordButton onClick={newVisitorHandler}>
                                     RECORD VISITOR
-                                </AddRecordButton>
-                            </div>
+                                </AddRecordButton></div>
                         </div>
                         {
                             editVisitor && 
