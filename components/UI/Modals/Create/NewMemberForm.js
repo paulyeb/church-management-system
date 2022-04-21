@@ -66,7 +66,7 @@ const NewMemberForm = (props) => {
     return (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-70 overflow-y-auto h-full w-full">
             <div className="relative top-10 mx-auto p-5 border 2xl:w-2/4 xl:w-3/4 lg:w-3/4 md:w-4/4 sm:w-4/4 xs:w-2/4 shadow-2xl rounded-2xl bg-white">
-                <form method="post" action="http://localhost::8000/api/v1/" onSubmit={submitFormHandler}>
+                <form method="post" onSubmit={submitFormHandler}>
                     <p className="text-center text-gray-500 font-light text-3xl">New Member Form</p>
                     <hr className=" my-3 mx-12"/>
                     <div className="grid grid-cols-2 g-4 text-xl p-4 justify-items-center">
