@@ -15,9 +15,10 @@ import DisplayUpdateSuccessMessage from "./UI/Modals/Update/SuccessMessage/Displ
 import ShowMemberModal from "./UI/Modals/Read/ShowMemberModal";
 import RestoreRecord from "./UI/Modals/Restore/RestoreRecord";
 import SuccessfulRestoreMessage from "./UI/Modals/Restore/RestoreSuccessMessage";
+import useMembers from "../hooks/useMembers";
 
 const HomePage = () => {
-    const [allMembers, setAllMembers] = useState([]);
+    // const [allMembers, setAllMembers] = useState([]);
     const [filteredMembers, setFilteredMembers] = useState([]);
     const [filteredName, setFilteredName] = useState('');
     const [newMemberForm, setNewMemberForm] = useState(false);
@@ -32,41 +33,43 @@ const HomePage = () => {
     const [descendButton, setDescendButton] = useState(false);
     const [memberToReceiveAction, setMemberToReceiveAction] = useState(null);
 
-    useEffect(() => {
-        fetchMembersData();
-    }, []);
+    const { allMembers, addMemberHandler } = useMembers();
 
-    const newMemberHandler = (members) => {
-        // console.log(members);
-        fetch("https://faithhouse-backend.herokuapp.com/api/v1/users/", {
-            method: "POST",
-            mode: 'cors',
-            body: JSON.stringify(members),
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json; charset=UTF-8"
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            fetchMembersData();
-        })
-        .catch((err) => console.log(err));    
-    }
+    useEffect(() => {
+        setFilteredMembers(allMembers);
+    }, [allMembers]);
+
+    // const newMemberHandler = (members) => {
+    //     // console.log(members);
+    //     fetch("https://faithhouse-backend.herokuapp.com/api/v1/users/", {
+    //         method: "POST",
+    //         mode: 'cors',
+    //         body: JSON.stringify(members),
+    //         headers: {
+    //             "Accept": "application/json",
+    //             "Content-Type": "application/json; charset=UTF-8"
+    //         }
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log(data);
+    //         fetchMembersData();
+    //     })
+    //     .catch((err) => console.log(err));    
+    // }
     
-    const fetchMembersData = () => {
-        fetch('http://localhost:8000/api/v1/users')
-            .then(res => res.json())
-            .then(data => {
-                setAllMembers(data);
-                setFilteredMembers(data);
-                console.log(data);
-            })
-            .catch((err) => console.log(err));
+    // const fetchMembersData = () => {
+    //     fetch('http://localhost:8000/api/v1/users')
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setAllMembers(data);
+    //             setFilteredMembers(data);
+    //             console.log(data);
+    //         })
+    //         .catch((err) => console.log(err));
         
-        // console.log(allMembers);
-    };
+    //     // console.log(allMembers);
+    // };
     
     const newMemberFormHandler = (event) => {
         event.preventDefault();
@@ -121,7 +124,7 @@ const HomePage = () => {
                         {
                             newMemberForm && 
                             <NewMemberForm 
-                                onAddNewMember={newMemberHandler} 
+                                onAddNewMember={addMemberHandler} 
                                 onClose={() => setNewMemberForm(false)} 
                             /> 
                         }
